@@ -6,7 +6,20 @@ module.exports = {
     './redux/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        brandColor: '#0066FF',
+        mainBG: '#04111C',
+        textColor: '#FFFFFF',
+        gradientLeft: '#0066FF',
+        gradientRight: '#3F00FF',
+        '2BG': '#1D2832',
+        '3BG': '#333D46',
+        '4BG': '#475058',
+        '5BG': '#596168',
+        '6BG': '#697077',
+      },
+    },
   },
   plugins: [],
 };

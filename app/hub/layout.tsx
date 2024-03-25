@@ -1,5 +1,9 @@
-import { GeistSans } from 'geist/font/sans';
+import { createClient } from '@/utils/supabase/server';
 import '@app/globals.css';
+import { Inter } from 'next/font/google';
+import { redirect } from 'next/navigation';
+
+const inter = Inter({ subsets: ['latin'] });
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -7,21 +11,29 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: 'Next.js and Supabase Starter Kit',
-  description: 'The fastest way to build apps with Next.js and Supabase',
+  title: 'Flawless',
+  description: 'Project management tool',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect('/login');
+  }
+
   return (
-    <html lang="en" className={GeistSans.className}>
-      <body className="bg-background text-foreground">
-        <main className="min-h-screen flex flex-col items-center">
-          {children}
-        </main>
+    <html lang="en" className={inter.className}>
+      <body className="bg-mainBG text-textColor">
+        <main className="">{children}</main>
       </body>
     </html>
   );

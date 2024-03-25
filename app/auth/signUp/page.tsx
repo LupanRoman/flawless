@@ -1,55 +1,84 @@
 import React from 'react';
-import { SubmitButton } from '@app/auth/login/submit-button';
+import Link from 'next/link';
+import { headers } from 'next/headers';
+import { createClient } from '@/utils/supabase/server';
+import { redirect } from 'next/navigation';
+import Image from 'next/image';
+import googleIcon from '@/public/google.png';
 
-type Props = {};
+export default function SignUp({
+  searchParams,
+}: {
+  searchParams: { message: string };
+}) {
+  const signUp = async (formData: FormData) => {
+    'use server';
 
-function page({}: Props) {
+    const origin = headers().get('origin');
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+    const supabase = createClient();
+
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: `${origin}/auth/callback`,
+      },
+    });
+
+    if (error) {
+      return redirect('/login?message=Could not authenticate user');
+    }
+
+    return redirect('/login?message=Check email to continue sign in process');
+  };
+
   return (
     <>
-      <div className="flex-1 flex flex-col w-full px-8 sm:max-w-md justify-center gap-2">
-        <form className="animate-in flex-1 flex flex-col w-full justify-center gap-2 text-foreground">
-          <label className="text-md" htmlFor="email">
-            Email
-          </label>
-          <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
-            name="email"
-            placeholder="you@example.com"
-            required
-          />
-          <label className="text-md" htmlFor="password">
-            Password
-          </label>
-          <input
-            className="rounded-md px-4 py-2 bg-inherit border mb-6"
-            type="password"
-            name="password"
-            placeholder="••••••••"
-            required
-          />
-          <SubmitButton
-            formAction={signIn}
-            className="bg-green-700 rounded-md px-4 py-2 text-foreground mb-2"
-            pendingText="Signing In..."
-          >
-            Sign up
-          </SubmitButton>
-          {/* <SubmitButton
-          formAction={signUp}
-          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-          pendingText="Signing Up..."
+      <div className="flex h-[100svh] bg-2BG/50 flex-col items-center justify-center md:w-2/5 md:rounded-r-2xl">
+        <button className="flex items-center bg-3BG gap-6 rounded-lg px-[32px] py-[16px] text-xl font-bold text-textColor">
+          <Image alt="log of google" width={30} height={30} src={googleIcon} />
+          Continue with Google
+        </button>
+        <p className="pb-[40px] pt-[20px] font-semibold text-textColor">or</p>
+        <form
+          autoComplete="off"
+          action={signUp}
+          className="flex flex-col gap-3"
         >
-          Sign Up
-        </SubmitButton> */}
-          {/* {searchParams?.message && (
+          <input
+            className="bg-mainBG rounded-lg py-[12px] indent-2 text-base font-semibold outline-none active:bg-mainBG"
+            type="email"
+            placeholder="Email address"
+            name="email"
+            required
+          />
+          <input
+            className="bg-mainBG active:bg-mainBG rounded-lg py-[12px] indent-2 text-base font-semibold outline-none"
+            type="password"
+            placeholder="Password"
+            name="password"
+            required
+          />
+          <div className="controls flex flex-col gap-2 pt-[100px]">
+            <button className="rounded-lg bg-gradient-to-r from-gradientLeft to-gradientRight py-[10px] text-xl font-bold text-textColor">
+              Sign up
+            </button>
+            <Link href={'/auth/login'}>
+              <button className="text-base text-textColor">
+                Already have an account ?
+                <span className="font-bold"> Log in</span>
+              </button>
+            </Link>
+          </div>
+          {searchParams?.message && (
             <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
               {searchParams.message}
             </p>
-          )} */}
+          )}
         </form>
       </div>
     </>
   );
 }
-
-export default page;
