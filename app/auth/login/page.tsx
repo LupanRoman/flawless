@@ -21,7 +21,7 @@ export default function LogIn() {
       return redirect('/login?message=Could not authenticate user');
     }
 
-    return redirect('/hub');
+    return redirect('http://localhost:3000/hub');
   };
 
   return (
