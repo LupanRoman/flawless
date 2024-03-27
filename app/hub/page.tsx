@@ -1,6 +1,7 @@
 import AllProjectsList from "@/components/hub/allProjectsList";
 import FavoriteProjectsList from "@/components/hub/favoriteProjectsList";
 import TopBarHub from "@/components/hub/topBarHub";
+import CreateProjectForm from "@/redux/features/handleProjects/createProjectForm";
 import { createClient } from "@/utils/supabase/server";
 
 export default async function Hub() {
@@ -17,10 +18,11 @@ export default async function Hub() {
 
   return (
     <>
-      <div>
+      <div className="relative">
         {/* <pre>{JSON.stringify(Projects, null, 2)}</pre> */}
         <TopBarHub email={user?.email} />
-        <div className="px-5 md:px-10 pt-10 flex flex-col gap-10">
+        <CreateProjectForm />
+        <div className="flex flex-col gap-10 px-5 pt-10 md:px-10">
           <FavoriteProjectsList serverFavoriteProjects={FavoriteProjects} />
           <AllProjectsList serverProjects={Projects} />
         </div>

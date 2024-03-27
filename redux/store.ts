@@ -1,7 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
+import handleProjectReducer from '@redux/features/handleProjects/handleProjectSlice'
+
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+handleProjectSlice: handleProjectReducer
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),
 });

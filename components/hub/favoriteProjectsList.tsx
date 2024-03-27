@@ -2,6 +2,7 @@
 import { createClient } from "@/utils/supabase/client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
 
 type Props = {
   serverFavoriteProjects: any;
@@ -36,14 +37,17 @@ function FavoriteProjectsList({ serverFavoriteProjects }: Props) {
   return (
     <>
       <div className="flex flex-col gap-5">
-        <h1 className="font-medium text-xl">Favorite projects</h1>
-        <div className="flex flex-col items-center gap-3 w-full">
+        <h1 className="text-xl font-medium">Favorite projects</h1>
+        <div className="flex w-full flex-col items-center gap-3">
           {favoriteProjectsList.map((favoriteProject: any) => {
             return (
               <>
                 <Link href={`/workspace/${favoriteProject.id}/dashboard`}>
-                  <div className="bg-2BG rounded-[10px] w-[230px] h-[240px] px-5 py-2">
-                    <h1 className="font-bold text-base">
+                  <div className="relative h-[240px] w-[230px] rounded-[10px] bg-2BG px-5 py-2">
+                    <p className="absolute -top-1 right-2">
+                      <BookmarkRoundedIcon />
+                    </p>
+                    <h1 className="text-base font-bold">
                       {favoriteProject.title}
                     </h1>
                   </div>

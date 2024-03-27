@@ -5,7 +5,7 @@ type Props = {};
 function Welcome({}: Props) {
   return (
     <>
-      <div>
+      <div className=''>
         <h1>Flawless</h1>
       </div>
     </>
