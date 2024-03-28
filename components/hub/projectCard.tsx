@@ -6,9 +6,10 @@ type Props = {
   title: string;
   projectID: string;
   isFavorite: boolean;
+  renderedIn: string;
 };
 
-function ProjectCard({ title, projectID, isFavorite }: Props) {
+function ProjectCard({ title, projectID, isFavorite, renderedIn }: Props) {
   const setToLocal = () => {
     localStorage.setItem("projectID", JSON.stringify(projectID));
   };
@@ -22,7 +23,7 @@ function ProjectCard({ title, projectID, isFavorite }: Props) {
           }}
         >
           <div className="relative h-[240px] w-[230px] rounded-[10px] bg-2BG px-5 py-2">
-            {isFavorite ? (
+            {renderedIn == "favorites" ? (
               <p className="absolute -top-1 right-2">
                 <BookmarkRoundedIcon />
               </p>

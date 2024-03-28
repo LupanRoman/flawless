@@ -19,6 +19,7 @@ function AllProjectsList({ projects }: Props) {
                   projectID={project.id}
                   isFavorite={project.favorite}
                   key={project.id}
+                  renderedIn="all"
                 />
               </>
             );

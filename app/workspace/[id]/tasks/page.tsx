@@ -15,15 +15,7 @@ async function page({ params: { id } }: { params: { id: number } }) {
       <div>
         <h1>Tasks</h1>
         <TasksList serverTasks={Tasks} />
-        {/* {Tasks?.map((task) => {
-          return (
-            <>
-              <div>
-                <h1>{task.title}</h1>
-              </div>
-            </>
-          );
-        })} */}
+        
       </div>
     </>
   );

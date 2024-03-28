@@ -15,12 +15,12 @@ function SideBar({}: Props) {
     const projectID = JSON.parse(localStorage.getItem("projectID") || "");
     setCurrentProjectID(projectID);
   }, []);
+  // TODO Create a new file and create a link component => send props to that link and render here to make the code cleaner
   return (
     <>
-      <div className="bg-secondaryBG flex items-center justify-around py-5 lg:h-full lg:max-w-[200px] lg:flex-col lg:items-start lg:justify-normal lg:gap-5 lg:px-3 lg:py-0 lg:pt-20">
+      <div className="flex items-center justify-around bg-2BG py-5 lg:h-full lg:max-w-[200px] lg:flex-col lg:items-start lg:justify-normal lg:gap-5 lg:px-3 lg:py-0 lg:pt-20">
         <Link
           onClick={() => {
-            console.log(currentProjectID);
             setActiveLink("Dashboard");
           }}
           href={`/workspace/${currentProjectID}/dashboard`}
@@ -36,8 +36,6 @@ function SideBar({}: Props) {
         <Link
           href={`/workspace/${currentProjectID}/tasks`}
           onClick={() => {
-            console.log(currentProjectID);
-
             setActiveLink("Tasks");
           }}
           className={`${
