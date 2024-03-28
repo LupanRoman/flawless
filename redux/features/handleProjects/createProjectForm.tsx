@@ -46,7 +46,7 @@ function CreateProjectForm({}: Props) {
       <div className="absolute top-0 z-40 flex h-[100svh] w-full flex-col justify-between bg-2BG">
         <div className="flex flex-col gap-10">
           <div className="flex items-center justify-between px-5 pt-20">
-            <h1>Create project</h1>
+            <h1 className="text-lg font-bold text-textColor">Create project</h1>
             <button
               onClick={() => {
                 dispatch(handleCreateProjectModal(!createProjectModalValue));
@@ -55,11 +55,11 @@ function CreateProjectForm({}: Props) {
               <CloseRoundedIcon />
             </button>
           </div>
-          <div className="flex flex-col gap-5 px-5">
+          <div className="flex flex-col gap-5 px-5 pt-20">
             <input
               type="text"
               placeholder="What is the project called"
-              className="bg-transparent text-xl font-bold outline-none"
+              className="bg-transparent text-xl font-medium outline-none"
               onChange={(e) => {
                 setProjectTitle(e.target.value);
               }}
