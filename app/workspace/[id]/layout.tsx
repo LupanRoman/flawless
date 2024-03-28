@@ -1,3 +1,5 @@
+import SideBar from "@/components/workspace/sideBar";
+import TopBar from "@/components/workspace/topBar";
 import ReduxProvider from "@/redux/redux-provider";
 import { createClient } from "@/utils/supabase/server";
 import "@app/globals.css";
@@ -34,8 +36,20 @@ export default async function RootLayout({
   return (
     <html lang="en" className={inter.className}>
       <ReduxProvider>
-        <body className="bg-mainBG text-textColor">
-          <main className="">{children}</main>
+        <body
+          className={`relative flex h-[100svh] flex-col bg-mainBG text-textColor lg:grid lg:max-h-[100vh] lg:grid-cols-6 lg:grid-rows-10`}
+        >
+          {/* <header> */}
+          <div className="lg:col-start-2 lg:col-end-7 lg:row-span-1">
+            <TopBar />
+          </div>
+          {/* </header> */}
+          <main className="px-4 lg:col-start-2 lg:col-end-7 lg:row-start-2 lg:row-end-11 lg:px-8">
+            {children}
+          </main>
+          <div className="fixed bottom-0 w-full lg:top-0 lg:col-start-1 lg:col-end-1 lg:row-start-1 lg:row-end-11 lg:w-fit">
+            <SideBar />
+          </div>
         </body>
       </ReduxProvider>
     </html>

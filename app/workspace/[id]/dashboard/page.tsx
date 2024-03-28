@@ -13,7 +13,6 @@ async function page({ params: { id } }: { params: { id: number } }) {
     <>
       <div>
         <h1>{Project![0].title}</h1>
-        <Link href={`/workspace/${id}/tasks`}>Tasks</Link>
       </div>
     </>
   );

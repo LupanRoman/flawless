@@ -1,5 +1,5 @@
 "use client";
-import Link from "next/link";
+import ProjectCard from "./projectCard";
 
 type Props = {
   projects: any;
@@ -14,11 +14,12 @@ function AllProjectsList({ projects }: Props) {
           {projects.map((project: any) => {
             return (
               <>
-                <Link href={`/workspace/${project.id}/dashboard`}>
-                  <div className="h-[240px] w-[230px] rounded-[10px] bg-2BG px-5 py-2">
-                    <h1 className="text-base font-bold">{project.title}</h1>
-                  </div>
-                </Link>
+                <ProjectCard
+                  title={project.title}
+                  projectID={project.id}
+                  isFavorite={project.favorite}
+                  key={project.id}
+                />
               </>
             );
           })}
