@@ -9,7 +9,7 @@ type Props = {
 function Filters({ filterTasksByPriority }: Props) {
   return (
     <>
-      <div className="pt-10">
+      <div className="z-40 pt-10">
         <PriorityFilter filterTasksByPriority={filterTasksByPriority} />
       </div>
     </>

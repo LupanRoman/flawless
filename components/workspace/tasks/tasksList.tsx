@@ -1,8 +1,10 @@
 "use client";
+import Boards from "@/data/boards";
 import { priorityFilterValue } from "@/redux/features/handleTasks/handleTasksSlice";
 import { useAppSelector } from "@/redux/store";
 import { createClient } from "@/utils/supabase/client";
 import React, { useEffect, useState } from "react";
+import SingleTask from "./singleTask";
 
 type Props = { serverTasks: any; projectID: number };
 
@@ -33,6 +35,7 @@ function TasksList({ serverTasks, projectID }: Props) {
     const filterTasks = async () => {
       const supabase = createClient();
 
+      // !! These values need to be controlled by the user
       const filtersApplied = true;
       const filterByPriority: string = priorityFilter;
 
@@ -70,12 +73,33 @@ function TasksList({ serverTasks, projectID }: Props) {
 
   return (
     <>
-      <div className="flex flex-col gap-2">
-        {tasksList.map((task: any) => {
+      <div className="horizontal flex snap-x gap-8 overflow-x-auto md:h-full md:overflow-x-hidden">
+        {Boards.map((board) => {
           return (
             <>
-              <div className="rounded-lg bg-2BG px-3 py-2">
-                <h1>{task.title}</h1>
+              <div
+                key={board.id}
+                className="boardComponent flex h-[550px] w-full flex-none snap-center flex-col gap-5 rounded-lg md:h-full md:flex-auto"
+              >
+                <h1 className="text-lg font-bold">{board.title}</h1>
+                <div className="flex h-[550px] flex-col gap-5 overflow-y-auto pr-2 md:h-[450px]">
+                  {tasksList.map((task: any) => {
+                    return (
+                      <>
+                        {task.status == board.title ? (
+                          // <div className="rounded-lg bg-2BG px-3 py-2">
+                          //   <h1>{task.title}</h1>
+                          // </div>
+                          <SingleTask
+                            title={task.title}
+                            priority={task.priority}
+                            key={task.id}
+                          />
+                        ) : null}
+                      </>
+                    );
+                  })}
+                </div>
               </div>
             </>
           );

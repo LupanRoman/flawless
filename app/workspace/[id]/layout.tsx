@@ -37,7 +37,7 @@ export default async function RootLayout({
     <html lang="en" className={inter.className}>
       <ReduxProvider>
         <body
-          className={`relative flex h-[100svh] flex-col bg-mainBG text-textColor lg:grid lg:max-h-[100vh] lg:grid-cols-6 lg:grid-rows-10`}
+          className={`relative flex h-[100svh] flex-col bg-mainBG text-textColor md:max-h-[100vh] lg:grid lg:grid-cols-6 lg:grid-rows-10`}
         >
           {/* <header> */}
           <div className="lg:col-start-2 lg:col-end-7 lg:row-span-1">

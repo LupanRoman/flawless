@@ -20,29 +20,6 @@ async function page({ params: { id } }: { params: { id: number } }) {
     console.log(filteredTasks);
   };
 
-  // !! These values need to be controlled by the user
-  // const filtersApplied = true;
-  // const filterByPriority: string = "High";
-
-  // let query = supabase.from("Tasks").select("*").eq("project_id", id);
-
-  // if (filtersApplied) {
-  //   switch (filterByPriority) {
-  //     case "High":
-  //       query = query.eq("project_id", id).eq("priority", filterByPriority);
-  //       break;
-  //     case "Medium":
-  //       query = query.eq("project_id", id).eq("priority", filterByPriority);
-  //       break;
-  //     case "Low":
-  //       query = query.eq("project_id", id).eq("priority", filterByPriority);
-  //       break;
-  //   }
-  // }
-
-  // const { data: Tasks, error } = await query;
-  // console.log(Tasks);
-
   return (
     <>
       <div>
