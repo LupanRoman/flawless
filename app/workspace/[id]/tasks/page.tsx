@@ -1,6 +1,9 @@
 import Filters from "@/components/workspace/tasks/filters";
 import TasksList from "@/components/workspace/tasks/tasksList";
+import CreateTaskForm from "@/redux/features/handleTasks/createTaskForm";
 import { createClient } from "@/utils/supabase/server";
+
+export const realtime = 0;
 
 async function page({ params: { id } }: { params: { id: number } }) {
   const supabase = createClient();
@@ -9,24 +12,13 @@ async function page({ params: { id } }: { params: { id: number } }) {
     .select("*")
     .eq("project_id", id);
 
-  const filterTasksByPriority = async (taskPriority: string) => {
-    "use server";
-    const supabase = createClient();
-    const { data: filteredTasks, error } = await supabase
-      .from("Tasks")
-      .select("*")
-      .eq("project_id", id)
-      .eq("priority", taskPriority);
-    console.log(filteredTasks);
-  };
-
   return (
     <>
-      <div>
-        <h1>Tasks</h1>
+      <div className="">
         <div className="flex w-full flex-col gap-10">
-          <Filters filterTasksByPriority={filterTasksByPriority} />
+          <Filters />
           <TasksList serverTasks={Tasks} projectID={id} />
+          <CreateTaskForm projectID={id} />
         </div>
       </div>
     </>

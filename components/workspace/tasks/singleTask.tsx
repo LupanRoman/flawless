@@ -10,9 +10,9 @@ function SingleTask({ title, priority }: Props) {
   return (
     <>
       <div className="relative flex cursor-pointer flex-col gap-5 rounded-lg bg-2BG px-3 py-2">
-        <div className="flex ">
+        <div className="flex">
           <p
-            className={`${priority == "High" ? "text-red-500" : priority == "Medium" ? "text-orange-500" : priority == "Low" ? "text-blue-500" : "hidden"} absolute -top-1 right-4 rotate-90`}
+            className={`${priority == "High" ? "text-highPriority" : priority == "Medium" ? "text-mediumPriority" : priority == "Low" ? "text-lowPriority" : "hidden"} absolute -top-1 right-4 rotate-90`}
           >
             <LabelRoundedIcon />
           </p>

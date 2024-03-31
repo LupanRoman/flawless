@@ -65,8 +65,9 @@ function TasksList({ serverTasks, projectID }: Props) {
       }
 
       const { data: Tasks, error } = await query;
-      setTasksList(Tasks);
-      console.log(Tasks);
+      if (priorityFilter != "All") {
+        setTasksList(Tasks);
+      }
     };
     filterTasks();
   }, [priorityFilter]);

@@ -1,16 +1,18 @@
 "use client";
+import CreateTaskBtn from "@/redux/features/handleTasks/createTaskBtn";
 import PriorityFilter from "@/redux/features/handleTasks/priorityFilter";
 import React from "react";
 
-type Props = {
-  filterTasksByPriority: (taskPriority: string) => void;
-};
+type Props = {};
 
-function Filters({ filterTasksByPriority }: Props) {
+function Filters({}: Props) {
   return (
     <>
-      <div className="z-40 pt-10">
-        <PriorityFilter filterTasksByPriority={filterTasksByPriority} />
+      <div className="z-40 flex w-full items-center justify-between pt-10">
+        <div>
+          <PriorityFilter />
+        </div>
+        <CreateTaskBtn />
       </div>
     </>
   );

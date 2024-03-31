@@ -1,23 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import ExpandMoreRoundedIcon from "@mui/icons-material/ExpandMoreRounded";
-import { createClient } from "@/utils/supabase/client";
-import { useAppDispatch } from "@/redux/store";
-import { setPriorityFilter } from "./handleTasksSlice";
-type Props = {
-  filterTasksByPriority: (taskPriority: string) => void;
-};
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { priorityFilterValue, setPriorityFilter } from "./handleTasksSlice";
+import LabelRoundedIcon from "@mui/icons-material/LabelRounded";
+type Props = {};
 
-function PriorityFilter({ filterTasksByPriority }: Props) {
-  //   const filterHighTasks = async () => {
-  //     const supabase = createClient();
-  //     const { data: FilteredTasks, error } = await supabase
-  //       .from("Tasks")
-  //       .select("*")
-  //       .eq("priority", "Low");
-  //     console.log(FilteredTasks);
-  //   };
+function PriorityFilter({}: Props) {
   const dispatch = useAppDispatch();
+  const priorityValue = useAppSelector(priorityFilterValue);
   const [openPriorityLabels, setOpenPriorityLabels] = useState(false);
   return (
     <>
@@ -26,9 +17,9 @@ function PriorityFilter({ filterTasksByPriority }: Props) {
           onClick={() => {
             setOpenPriorityLabels(!openPriorityLabels);
           }}
-          className="flex w-fit items-center gap-8 rounded-lg bg-2BG px-4 py-2"
+          className="flex w-[150px] items-center justify-between rounded-lg bg-2BG px-4 py-2"
         >
-          <p>Priority</p>
+          <p> {priorityValue == "" ? "Priority" : priorityValue}</p>
           {openPriorityLabels ? (
             <p className="rotate-180 duration-700">
               <ExpandMoreRoundedIcon />
@@ -44,43 +35,48 @@ function PriorityFilter({ filterTasksByPriority }: Props) {
             <button
               className="w-full rounded-md px-2 py-1 text-start hover:bg-4BG"
               onClick={() => {
-                // filterTasksByPriority("High");
                 dispatch(setPriorityFilter(""));
                 setOpenPriorityLabels(!openPriorityLabels);
               }}
             >
               All
             </button>
-            <button
-              className="w-full rounded-md px-2 py-1 text-start hover:bg-red-700/50"
+            <div
+              className="hover:bg-highPriority/20 flex w-full cursor-pointer items-center gap-3 rounded-md px-2 py-1 text-start"
               onClick={() => {
-                // filterTasksByPriority("High");
                 dispatch(setPriorityFilter("High"));
                 setOpenPriorityLabels(!openPriorityLabels);
               }}
             >
-              High
-            </button>
-            <button
-              className="w-full rounded-md px-2 py-1 text-start hover:bg-orange-600/50"
+              <p className="text-highPriority rotate-90">
+                <LabelRoundedIcon />
+              </p>
+              <p>High</p>
+            </div>
+            <div
+              className="hover:bg-mediumPriority/20 flex w-full items-center gap-3 rounded-md px-2 py-1 text-start"
               onClick={() => {
-                // filterTasksByPriority("High");
                 dispatch(setPriorityFilter("Medium"));
                 setOpenPriorityLabels(!openPriorityLabels);
               }}
             >
-              Medium
-            </button>
-            <button
-              className="w-full rounded-md px-2 py-1 text-start hover:bg-blue-500/50"
+              <p className="text-mediumPriority rotate-90">
+                <LabelRoundedIcon />
+              </p>
+              <p>Medium</p>
+            </div>
+            <div
+              className="hover:bg-lowPriority/20 flex w-full items-center gap-3 rounded-md px-2 py-1 text-start"
               onClick={() => {
-                // filterTasksByPriority("High");
                 dispatch(setPriorityFilter("Low"));
                 setOpenPriorityLabels(!openPriorityLabels);
               }}
             >
-              Low
-            </button>
+              <p className="text-lowPriority rotate-90">
+                <LabelRoundedIcon />
+              </p>
+              <p>Low</p>
+            </div>
           </div>
         ) : null}
       </div>
