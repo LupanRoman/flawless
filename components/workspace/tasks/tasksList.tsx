@@ -74,16 +74,16 @@ function TasksList({ serverTasks, projectID }: Props) {
 
   return (
     <>
-      <div className="horizontal flex snap-x gap-8 overflow-x-auto md:h-full md:overflow-x-hidden">
+      <div className="horizontal flex snap-x gap-3 overflow-x-auto md:h-full md:overflow-x-hidden">
         {Boards.map((board) => {
           return (
             <>
               <div
                 key={board.id}
-                className="boardComponent flex h-[550px] w-full flex-none snap-center flex-col gap-5 rounded-lg md:h-full md:flex-auto"
+                className="boardComponent flex h-[580px] w-full flex-none snap-center flex-col gap-3 rounded-lg md:h-full md:flex-auto"
               >
-                <h1 className="text-lg font-bold">{board.title}</h1>
-                <div className="flex h-[550px] flex-col gap-5 overflow-y-auto pr-2 md:h-[450px]">
+                <h1 className="text-lg font-semibold">{board.title}</h1>
+                <div className="tasks-scroll flex h-[580px] flex-col gap-3 overflow-y-auto pr-2 md:h-[500px]">
                   {tasksList.map((task: any) => {
                     return (
                       <>

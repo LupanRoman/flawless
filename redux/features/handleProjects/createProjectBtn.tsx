@@ -17,7 +17,7 @@ function CreateProjectBtn({}: Props) {
         onClick={() => {
           dispatch(handleCreateProjectModal(!createProjectModalValue));
         }}
-        className="rounded-[10px] bg-brandColor px-5 py-2 text-base font-bold"
+        className="rounded-[10px] bg-brandColor px-5 py-2 text-base font-semibold"
       >
         Create project
       </button>

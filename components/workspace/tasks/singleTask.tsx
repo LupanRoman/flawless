@@ -20,7 +20,7 @@ function SingleTask({ title, priority }: Props) {
             MVP
           </p>
         </div>
-        <h2 className="font-medium">{title}</h2>
+        <h2 className="text-sm font-normal">{title}</h2>
       </div>
     </>
   );

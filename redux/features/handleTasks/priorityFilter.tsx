@@ -17,9 +17,12 @@ function PriorityFilter({}: Props) {
           onClick={() => {
             setOpenPriorityLabels(!openPriorityLabels);
           }}
-          className="flex w-[150px] items-center justify-between rounded-lg bg-2BG px-4 py-2"
+          className="flex w-[150px] items-center justify-between rounded-lg bg-2BG px-2 py-1"
         >
-          <p> {priorityValue == "" ? "Priority" : priorityValue}</p>
+          <p className="text-sm">
+            {" "}
+            {priorityValue == "" ? "Priority" : priorityValue}
+          </p>
           {openPriorityLabels ? (
             <p className="rotate-180 duration-700">
               <ExpandMoreRoundedIcon />

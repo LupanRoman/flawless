@@ -10,7 +10,7 @@ function FavoriteProjectsList({ favoriteProjects }: Props) {
   return (
     <>
       <div className="flex flex-col gap-5">
-        <h1 className="text-xl font-medium">Favorite projects</h1>
+        <h1 className="text-lg font-medium">Favorite projects</h1>
         <div className="flex w-full flex-col flex-wrap items-center gap-3 md:flex-row">
           {favoriteProjects.map((favoriteProject: any) => {
             return (

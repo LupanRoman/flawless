@@ -47,7 +47,7 @@ function CreateTaskForm({ projectID }: Props) {
       <div className="absolute right-0 top-0 z-40 flex h-[100svh] w-full flex-col justify-between bg-2BG md:w-1/3">
         <div className="flex flex-col gap-10">
           <div className="flex items-center justify-between px-5 pt-10">
-            <h1 className="text-lg font-bold text-textColor">Create task</h1>
+            <h1 className="text-lg font-normal text-textColor">Create task</h1>
             <button
               onClick={() => {
                 dispatch(handleCreateTaskModalState(!createTaskModal));
@@ -65,7 +65,7 @@ function CreateTaskForm({ projectID }: Props) {
                 setTaskTitle(e.target.value);
               }}
             />
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-4">
               <div className="flex items-center gap-2">
                 <p>Priority:</p>
                 <div

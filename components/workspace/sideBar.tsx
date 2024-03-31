@@ -28,7 +28,7 @@ function SideBar({}: Props) {
             activeLink == "Dashboard" ? "bg-brandColor" : "bg-transparent"
           } rounded-full px-[20px] py-[10px] lg:w-full lg:rounded-lg lg:px-4`}
         >
-          <button className="items-center gap-2 text-xl font-semibold lg:flex">
+          <button className="items-center gap-2 text-lg font-medium lg:flex">
             <SpaceDashboardOutlinedIcon />
             <p className="hidden lg:flex">Dashboard</p>
           </button>
@@ -42,7 +42,7 @@ function SideBar({}: Props) {
             activeLink == "Tasks" ? "bg-brandColor" : "bg-transparent"
           } rounded-full px-[20px] py-[10px] lg:w-full lg:rounded-lg lg:px-4`}
         >
-          <button className="items-center gap-2 text-xl font-semibold lg:flex">
+          <button className="items-center gap-2 text-lg font-medium  lg:flex">
             <CheckCircleOutlineRoundedIcon />
             <p className="hidden lg:flex">Tasks</p>
           </button>
@@ -56,7 +56,7 @@ function SideBar({}: Props) {
             activeLink == "Analytics" ? "bg-brandColor" : "bg-transparent"
           } rounded-full px-[20px] py-[10px] lg:w-full lg:rounded-lg lg:px-4`}
         >
-          <button className="items-center gap-2 text-xl font-semibold lg:flex">
+          <button className="items-center gap-2 text-lg font-medium  lg:flex">
             <DonutLargeRoundedIcon />
             <p className="hidden lg:flex">Analytics</p>
           </button>

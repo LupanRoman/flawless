@@ -28,7 +28,7 @@ function ProjectCard({ title, projectID, isFavorite, renderedIn }: Props) {
                 <BookmarkRoundedIcon />
               </p>
             ) : null}
-            <h1 className="text-base font-bold">{title}</h1>
+            <h1 className="text-base font-medium">{title}</h1>
           </div>
         </Link>
       </div>
