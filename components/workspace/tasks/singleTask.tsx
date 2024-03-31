@@ -16,7 +16,7 @@ function SingleTask({ title, priority }: Props) {
           >
             <LabelRoundedIcon />
           </p>
-          <p className="w-fit rounded-full bg-green-600/60 px-2 py-1 text-xs font-medium">
+          <p className="w-fit rounded-full bg-3BG px-2 py-1 text-xs font-medium">
             MVP
           </p>
         </div>

@@ -6,6 +6,9 @@ interface TasksState {
   priorityFilter: string;
   taskPriority: string;
   setTaskPriorityState: boolean;
+  groupFilter: string;
+  taskGroup: string;
+  setTaskGroupState: boolean;
 }
 
 const initialState: TasksState = {
@@ -13,6 +16,9 @@ const initialState: TasksState = {
   priorityFilter: "",
   taskPriority: "",
   setTaskPriorityState: false,
+  groupFilter: "",
+  taskGroup: "",
+  setTaskGroupState: false,
 };
 
 export const handleTasksSlice = createSlice({
@@ -32,6 +38,16 @@ export const handleTasksSlice = createSlice({
     },
     handleSetTaskPriorityState: (state, action) => {
       state.setTaskPriorityState = action.payload;
+    },
+    // ** Group filters
+    setGroupFilter: (state, action) => {
+      state.groupFilter = action.payload;
+    },
+    setTaskGroup: (state, action) => {
+      state.taskGroup = action.payload;
+    },
+    handleTaskGroupState: (state, action) => {
+      state.setTaskGroupState = action.payload;
     },
   },
 });
@@ -57,6 +73,19 @@ export const TaskPriorityValue = (state: RootState): string => {
 
 export const setTaskPriorityModalValue = (state: RootState): boolean => {
   return state.handleTaskSlice.setTaskPriorityState;
+};
+
+// ** Group filtering
+export const groupFilterValue = (state: RootState): string => {
+  return state.handleTaskSlice.groupFilter;
+};
+
+export const TaskGroupValue = (state: RootState): string => {
+  return state.handleTaskSlice.taskGroup;
+};
+
+export const setTaskGroupModalValue = (state: RootState): boolean => {
+  return state.handleTaskSlice.setTaskGroupState;
 };
 
 export default handleTasksSlice.reducer;

@@ -17,7 +17,7 @@ function PriorityFilter({}: Props) {
           onClick={() => {
             setOpenPriorityLabels(!openPriorityLabels);
           }}
-          className="flex w-[150px] items-center justify-between rounded-lg bg-2BG px-2 py-1"
+          className="flex w-[150px] items-center justify-between rounded-lg bg-2BG px-2 py-1 cursor-pointer"
         >
           <p className="text-sm">
             {" "}
