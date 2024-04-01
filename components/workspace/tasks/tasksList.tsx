@@ -5,6 +5,7 @@ import { useAppSelector } from "@/redux/store";
 import { createClient } from "@/utils/supabase/client";
 import React, { useEffect, useState } from "react";
 import SingleTask from "./singleTask";
+import Filters from "./filters";
 
 type Props = { serverTasks: any; projectID: number };
 
@@ -74,37 +75,40 @@ function TasksList({ serverTasks, projectID }: Props) {
 
   return (
     <>
-      <div className="horizontal flex snap-x gap-3 overflow-x-auto md:h-full md:overflow-x-hidden">
-        {Boards.map((board) => {
-          return (
-            <>
-              <div
-                key={board.id}
-                className="boardComponent flex h-[580px] w-full flex-none snap-center flex-col gap-3 rounded-lg md:h-full md:flex-auto"
-              >
-                <h1 className="text-lg font-semibold">{board.title}</h1>
-                <div className="tasks-scroll flex h-[580px] flex-col gap-3 overflow-y-auto pr-2 md:h-[500px]">
-                  {tasksList.map((task: any) => {
-                    return (
-                      <>
-                        {task.status == board.title ? (
-                          // <div className="rounded-lg bg-2BG px-3 py-2">
-                          //   <h1>{task.title}</h1>
-                          // </div>
-                          <SingleTask
-                            title={task.title}
-                            priority={task.priority}
-                            key={task.id}
-                          />
-                        ) : null}
-                      </>
-                    );
-                  })}
+      <div className="flex w-full flex-col gap-10">
+        {/* <Filters groups={groupList} /> */}
+        <div className="horizontal flex snap-x gap-3 overflow-x-auto md:h-full md:overflow-x-hidden">
+          {Boards.map((board) => {
+            return (
+              <>
+                <div
+                  key={board.id}
+                  className="boardComponent flex h-[580px] w-full flex-none snap-center flex-col gap-3 rounded-lg md:h-full md:flex-auto"
+                >
+                  <h1 className="text-lg font-semibold">{board.title}</h1>
+                  <div className="tasks-scroll flex h-[580px] flex-col gap-3 overflow-y-auto pr-2 md:h-[500px]">
+                    {tasksList.map((task: any) => {
+                      return (
+                        <>
+                          {task.status == board.title ? (
+                            // <div className="rounded-lg bg-2BG px-3 py-2">
+                            //   <h1>{task.title}</h1>
+                            // </div>
+                            <SingleTask
+                              title={task.title}
+                              priority={task.priority}
+                              key={task.id}
+                            />
+                          ) : null}
+                        </>
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            </>
-          );
-        })}
+              </>
+            );
+          })}
+        </div>
       </div>
     </>
   );
