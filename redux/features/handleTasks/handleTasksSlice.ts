@@ -57,6 +57,9 @@ export const {
   handleCreateTaskModalState,
   setTaskPriority,
   handleSetTaskPriorityState,
+  setGroupFilter,
+  setTaskGroup,
+  handleTaskGroupState,
 } = handleTasksSlice.actions;
 
 export const priorityFilterValue = (state: RootState): string => {

@@ -17,10 +17,9 @@ function PriorityFilter({}: Props) {
           onClick={() => {
             setOpenPriorityLabels(!openPriorityLabels);
           }}
-          className="flex w-[150px] items-center justify-between rounded-lg bg-2BG px-2 py-1 cursor-pointer"
+          className="flex w-[150px] cursor-pointer items-center justify-between rounded-lg bg-2BG px-2 py-1"
         >
           <p className="text-sm">
-            {" "}
             {priorityValue == "" ? "Priority" : priorityValue}
           </p>
           {openPriorityLabels ? (
@@ -34,7 +33,7 @@ function PriorityFilter({}: Props) {
           )}
         </div>
         {openPriorityLabels ? (
-          <div className="absolute left-0 right-0 top-12 flex flex-col items-start gap-2 rounded-lg bg-3BG px-2 py-2">
+          <div className="absolute left-0 right-0 top-12 flex flex-col items-start gap-2 rounded-lg bg-3BG px-2 py-2 text-sm">
             <button
               className="w-full rounded-md px-2 py-1 text-start hover:bg-4BG"
               onClick={() => {
@@ -45,37 +44,37 @@ function PriorityFilter({}: Props) {
               All
             </button>
             <div
-              className="hover:bg-highPriority/20 flex w-full cursor-pointer items-center gap-3 rounded-md px-2 py-1 text-start"
+              className="flex w-full cursor-pointer items-center gap-1 rounded-md px-2 py-1 text-start hover:bg-highPriority/20"
               onClick={() => {
                 dispatch(setPriorityFilter("High"));
                 setOpenPriorityLabels(!openPriorityLabels);
               }}
             >
-              <p className="text-highPriority rotate-90">
+              <p className="rotate-90 text-highPriority">
                 <LabelRoundedIcon />
               </p>
               <p>High</p>
             </div>
             <div
-              className="hover:bg-mediumPriority/20 flex w-full items-center gap-3 rounded-md px-2 py-1 text-start"
+              className="flex w-full items-center gap-1 rounded-md px-2 py-1 text-start hover:bg-mediumPriority/20"
               onClick={() => {
                 dispatch(setPriorityFilter("Medium"));
                 setOpenPriorityLabels(!openPriorityLabels);
               }}
             >
-              <p className="text-mediumPriority rotate-90">
+              <p className="rotate-90 text-mediumPriority">
                 <LabelRoundedIcon />
               </p>
               <p>Medium</p>
             </div>
             <div
-              className="hover:bg-lowPriority/20 flex w-full items-center gap-3 rounded-md px-2 py-1 text-start"
+              className="flex w-full items-center gap-1 rounded-md px-2 py-1 text-start hover:bg-lowPriority/20"
               onClick={() => {
                 dispatch(setPriorityFilter("Low"));
                 setOpenPriorityLabels(!openPriorityLabels);
               }}
             >
-              <p className="text-lowPriority rotate-90">
+              <p className="rotate-90 text-lowPriority">
                 <LabelRoundedIcon />
               </p>
               <p>Low</p>

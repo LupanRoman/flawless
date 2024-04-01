@@ -3,7 +3,7 @@ import TasksList from "@/components/workspace/tasks/tasksList";
 import CreateTaskForm from "@/redux/features/handleTasks/createTaskForm";
 import { createClient } from "@/utils/supabase/server";
 
-export const realtime = 0;
+export const revalidate = 0;
 
 async function page({ params: { id } }: { params: { id: number } }) {
   const supabase = createClient();
