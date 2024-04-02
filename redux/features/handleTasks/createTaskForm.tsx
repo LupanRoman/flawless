@@ -50,7 +50,7 @@ function CreateTaskForm({ projectID }: Props) {
 
   return createTaskModal ? (
     <>
-      <div className="absolute right-0 top-0 z-40 flex h-[100svh] w-full flex-col justify-between bg-2BG md:w-1/3">
+      <div className="absolute right-0 top-0 z-40 flex h-[100svh] w-full flex-col justify-between bg-2BG md:w-1/2">
         <div className="flex flex-col gap-10">
           <div className="flex items-center justify-between px-5 pt-10">
             <h1 className="text-lg font-normal text-textColor">Create task</h1>
@@ -84,7 +84,7 @@ function CreateTaskForm({ projectID }: Props) {
                   <SetPriority />
                 </div>
               </div>
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <p>Group:</p>
                 <div
                   className="relative w-[150px] cursor-pointer rounded-lg bg-3BG px-3 py-1"
@@ -95,7 +95,7 @@ function CreateTaskForm({ projectID }: Props) {
                   <p>{taskGroup == "" ? "None" : taskGroup}</p>
                   <SetGroup />
                 </div>
-              </div>
+              </div> */}
               <div className="flex items-center gap-2">
                 <p>Deadline:</p>
                 <input
