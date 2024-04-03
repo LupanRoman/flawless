@@ -20,8 +20,10 @@ export const metadata = {
 
 export default async function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   const supabase = createClient();
 
@@ -45,6 +47,7 @@ export default async function RootLayout({
           </div>
           {/* </header> */}
           <main className="px-4 lg:col-start-2 lg:col-end-7 lg:row-start-2 lg:row-end-11 lg:px-8">
+            {modal}
             {children}
           </main>
           <div className="fixed bottom-0 w-full lg:top-0 lg:col-start-1 lg:col-end-1 lg:row-start-1 lg:row-end-11 lg:w-fit">

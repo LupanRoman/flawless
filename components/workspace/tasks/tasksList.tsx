@@ -98,6 +98,8 @@ function TasksList({ serverTasks, projectID }: Props) {
                               title={task.title}
                               priority={task.priority}
                               key={task.id}
+                              projectID={projectID}
+                              taskID={task.id}
                             />
                           ) : null}
                         </>
