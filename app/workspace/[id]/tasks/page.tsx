@@ -14,7 +14,7 @@ async function page({ params: { id } }: { params: { id: number } }) {
 
   return (
     <>
-      <div className="">
+      <div>
         <div className="flex w-full flex-col gap-10">
           <Filters />
           <TasksList serverTasks={Tasks} projectID={id} />

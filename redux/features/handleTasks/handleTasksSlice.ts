@@ -9,6 +9,7 @@ interface TasksState {
   groupFilter: string;
   taskGroup: string;
   setTaskGroupState: boolean;
+  handleEditTaskModal: boolean;
 }
 
 const initialState: TasksState = {
@@ -19,6 +20,7 @@ const initialState: TasksState = {
   groupFilter: "",
   taskGroup: "",
   setTaskGroupState: false,
+  handleEditTaskModal: false,
 };
 
 export const handleTasksSlice = createSlice({
@@ -49,6 +51,9 @@ export const handleTasksSlice = createSlice({
     handleTaskGroupState: (state, action) => {
       state.setTaskGroupState = action.payload;
     },
+    handleEditTaskModal: (state, action) => {
+      state.handleEditTaskModal = action.payload;
+    },
   },
 });
 
@@ -60,6 +65,7 @@ export const {
   setGroupFilter,
   setTaskGroup,
   handleTaskGroupState,
+  handleEditTaskModal,
 } = handleTasksSlice.actions;
 
 export const priorityFilterValue = (state: RootState): string => {
@@ -89,6 +95,10 @@ export const TaskGroupValue = (state: RootState): string => {
 
 export const setTaskGroupModalValue = (state: RootState): boolean => {
   return state.handleTaskSlice.setTaskGroupState;
+};
+
+export const editTaskModalValue = (state: RootState): boolean => {
+  return state.handleTaskSlice.handleEditTaskModal;
 };
 
 export default handleTasksSlice.reducer;
