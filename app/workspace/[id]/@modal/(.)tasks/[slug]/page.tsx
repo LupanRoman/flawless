@@ -8,11 +8,9 @@ type Props = {};
 async function page({ params: { slug } }: { params: { slug: number } }) {
   return (
     <>
-      <div>
-        <Modal>
-          <EditTask slug={slug} />
-        </Modal>
-      </div>
+      <Modal>
+        <EditTask slug={slug} />
+      </Modal>
     </>
   );
 }

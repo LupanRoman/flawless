@@ -16,7 +16,7 @@ async function Filters({}: Props) {
 
   return (
     <>
-      <div className="z-40 flex w-full items-center justify-between pt-10">
+      <div className="z-10 flex w-full items-center justify-between pt-10">
         <div className="flex items-center gap-3">
           <PriorityFilter />
           {/* <GroupFilter serverGroups={Groups} /> */}
