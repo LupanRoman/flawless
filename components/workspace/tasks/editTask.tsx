@@ -39,16 +39,22 @@ function EditTask({ slug }: Props) {
     getTask();
   }, []);
 
-  const updateTask = async () => {
+  const updateTask = async (
+    title: string,
+    priority: string,
+    deadline: string,
+    description: string,
+    status: string,
+  ) => {
     const supabase = createClient();
     const { data, error } = await supabase
       .from("Tasks")
       .update({
-        title: taskTitle,
-        priority: taskPriority,
-        deadline: taskDeadline,
-        description: taskDescription,
-        status: taskStatus,
+        title: taskTitle == "" ? title : taskTitle,
+        priority: taskPriority == "" ? priority : taskPriority,
+        deadline: taskDeadline == "" ? deadline : taskDeadline,
+        description: taskDescription == "" ? description : taskDescription,
+        status: taskStatus == "" ? status : taskStatus,
       })
       .eq("id", slug)
       .select();
@@ -73,7 +79,7 @@ function EditTask({ slug }: Props) {
 
   return (
     <>
-      {task?.map((element: any) => {
+      {task?.map(({ title, status, priority, deadline, description }) => {
         return (
           <>
             <div
@@ -107,14 +113,14 @@ function EditTask({ slug }: Props) {
                       }}
                       className="w-fit cursor-pointer rounded-lg bg-3BG px-2 py-1 text-sm"
                     >
-                      {element.status}
+                      {status}
                     </button>
                     {showStatus ? (
                       <div className="absolute top-10 z-20 flex flex-col items-start gap-2 rounded-lg bg-3BG px-2 py-1">
                         <button
                           onClick={() => {
                             setTaskStatus("To do");
-                            updateStatus();
+                            // updateStatus();
                             setShowStatus(!showStatus);
                           }}
                         >
@@ -123,7 +129,7 @@ function EditTask({ slug }: Props) {
                         <button
                           onClick={() => {
                             setTaskStatus("In progress");
-                            updateStatus();
+                            // updateStatus();
                             setShowStatus(!showStatus);
                           }}
                         >
@@ -132,7 +138,7 @@ function EditTask({ slug }: Props) {
                         <button
                           onClick={() => {
                             setTaskStatus("Done");
-                            updateStatus();
+                            // updateStatus();
                             setShowStatus(!showStatus);
                           }}
                         >
@@ -143,7 +149,7 @@ function EditTask({ slug }: Props) {
                   </div>
                   <input
                     type="text"
-                    placeholder={element.title}
+                    placeholder={title}
                     className="bg-transparent text-xl font-medium outline-none"
                     onChange={(e) => {
                       setTaskTitle(e.target.value);
@@ -160,9 +166,7 @@ function EditTask({ slug }: Props) {
                           );
                         }}
                       >
-                        <p>
-                          {element.priority ? element.priority : taskPriority}
-                        </p>
+                        <p>{priority ? priority : taskPriority}</p>
                         <SetPriority />
                       </div>
                     </div>
@@ -171,7 +175,7 @@ function EditTask({ slug }: Props) {
                       <input
                         className="cursor-pointer bg-transparent text-textColor"
                         type="date"
-                        value={element.deadline}
+                        value={deadline}
                         onChange={(e) => {
                           setTaskDeadline(e.target.value);
                         }}
@@ -186,7 +190,7 @@ function EditTask({ slug }: Props) {
                         setTaskDescription(e.target.value);
                       }}
                     >
-                      {element.description}
+                      {description}
                     </textarea>
                   </div>
                 </div>
@@ -194,7 +198,7 @@ function EditTask({ slug }: Props) {
               <div className="flex w-full justify-end gap-4 pb-10 pr-5">
                 <button
                   onClick={() => {
-                    updateTask();
+                    updateTask(title, status, priority, deadline, description);
                     router.back();
                   }}
                   className=" rounded-lg bg-brandColor px-3 py-2 font-medium"
