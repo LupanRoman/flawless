@@ -1,6 +1,5 @@
 import EditTask from "@/components/workspace/tasks/editTask";
 import Modal from "@/components/workspace/tasks/modal";
-import { createClient } from "@/utils/supabase/server";
 import React from "react";
 
 type Props = {};

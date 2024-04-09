@@ -6,12 +6,13 @@ import AllProjectsList from "./allProjectsList";
 
 type Props = {
   serverProjects: any;
+  favoriteProjects: any;
 };
 
-function RealtimeProjects({ serverProjects }: Props) {
+function RealtimeProjects({ serverProjects, favoriteProjects }: Props) {
   const [allProjects, setAllProjects] = useState(serverProjects);
   const [favoriteProjectsList, setFavoriteProjectsList] =
-    useState(serverProjects);
+    useState(favoriteProjects);
 
   useEffect(() => {
     const supabase = createClient();
@@ -31,11 +32,11 @@ function RealtimeProjects({ serverProjects }: Props) {
         "postgres_changes",
         { event: "*", schema: "public", table: "Projects" },
         async () => {
-          const { data: Projects } = await supabase
+          const { data: FavoriteProjects } = await supabase
             .from("Projects")
             .select("*")
             .eq("favorite", true);
-          setFavoriteProjectsList(Projects);
+          setFavoriteProjectsList(FavoriteProjects);
         },
       )
       .subscribe();

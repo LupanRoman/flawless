@@ -20,9 +20,10 @@ function SingleTask({ title, priority, projectID, taskID }: Props) {
             >
               <LabelRoundedIcon />
             </p>
-            <p className="w-fit rounded-full bg-3BG px-2 py-1 text-xs font-medium">
+            {/* Implement group creation and filtering */}
+            {/* <p className="w-fit rounded-full bg-3BG px-2 py-1 text-xs font-medium">
               MVP
-            </p>
+            </p> */}
           </div>
           <h2 className="text-sm font-normal">{title}</h2>
         </div>

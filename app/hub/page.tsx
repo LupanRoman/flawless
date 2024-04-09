@@ -7,20 +7,30 @@ import { createClient } from "@/utils/supabase/server";
 
 export default async function Hub() {
   const supabase = createClient();
-  let { data: Projects, error } = await supabase.from("Projects").select("*");
 
   const {
     data: { user },
   } = await supabase.auth.getUser();
+
+  // let { data: Projects, error } = await supabase
+  //   .from("Projects")
+  //   .select("*, Assignees!inner(user_id)")
+  //   .eq("Assignees.user_id", user?.id);
+
+  const { data: Projects, error } = await supabase.from("Projects").select("*");
+  const { data: FavoriteProjects } = await supabase
+    .from("Projects")
+    .select("*")
+    .eq("favorite", true);
+
+  // console.log(Projects);
 
   return (
     <>
       <div className="relative">
         <TopBarHub email={user?.email} />
         <CreateProjectForm />
-        <div>
-          <RealtimeProjects serverProjects={Projects} />
-        </div>
+        <RealtimeProjects serverProjects={Projects} favoriteProjects={FavoriteProjects} />
       </div>
     </>
   );

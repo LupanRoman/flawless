@@ -39,6 +39,11 @@ function CreateProjectForm({}: Props) {
       deadline: projectDeadline,
       user_id: userID,
     });
+
+    // const { data } = await supabase
+    //   .from("Assignees")
+    //   .insert([{ project_id: "someValue", user_id: userID }])
+    //   .select();
   };
 
   return createProjectModalValue ? (
