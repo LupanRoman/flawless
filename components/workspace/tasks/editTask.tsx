@@ -7,10 +7,14 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import {
   TaskPriorityValue,
   handleSetTaskPriorityState,
+  handleTaskStatusModal,
   setTaskPriorityModalValue,
+  taskStatusModalValue,
+  taskStatusValue,
 } from "@/redux/features/handleTasks/handleTasksSlice";
 import SetPriority from "@/redux/features/handleTasks/setPriority";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
+import EditTaskStatus from "./editTaskStatus";
 type Props = {
   slug: number;
 };
@@ -23,9 +27,11 @@ function EditTask({ slug }: Props) {
   const [taskDeadline, setTaskDeadline] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const setTaskPriorityModal = useAppSelector(setTaskPriorityModalValue);
+  const taskStatus = useAppSelector(taskStatusValue);
   const taskPriority = useAppSelector(TaskPriorityValue);
-  const [showStatus, setShowStatus] = useState(false);
-  const [taskStatus, setTaskStatus] = useState("To do");
+  // const [showStatus, setShowStatus] = useState(false);
+  const taskStatusModal = useAppSelector(taskStatusModalValue);
+  // const [taskStatus, setTaskStatus] = useState("To do");
 
   useEffect(() => {
     const getTask = async () => {
@@ -109,43 +115,13 @@ function EditTask({ slug }: Props) {
                   <div className="relative">
                     <button
                       onClick={() => {
-                        setShowStatus(!showStatus);
+                        dispatch(handleTaskStatusModal(!taskStatusModal));
                       }}
                       className="w-fit cursor-pointer rounded-lg bg-3BG px-2 py-1 text-sm"
                     >
-                      {status}
+                      {taskStatus == "" ? status : taskStatus}
                     </button>
-                    {showStatus ? (
-                      <div className="absolute top-10 z-20 flex flex-col items-start gap-2 rounded-lg bg-3BG px-2 py-1">
-                        <button
-                          onClick={() => {
-                            setTaskStatus("To do");
-                            // updateStatus();
-                            setShowStatus(!showStatus);
-                          }}
-                        >
-                          To do
-                        </button>
-                        <button
-                          onClick={() => {
-                            setTaskStatus("In progress");
-                            // updateStatus();
-                            setShowStatus(!showStatus);
-                          }}
-                        >
-                          In progress
-                        </button>
-                        <button
-                          onClick={() => {
-                            setTaskStatus("Done");
-                            // updateStatus();
-                            setShowStatus(!showStatus);
-                          }}
-                        >
-                          Done
-                        </button>
-                      </div>
-                    ) : null}
+                    {taskStatusModal ? <EditTaskStatus /> : null}
                   </div>
                   <input
                     type="text"

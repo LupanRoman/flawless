@@ -56,7 +56,7 @@ function TopBar({}: Props) {
             </button>
           </Link>
           <ControlProject />
-          <EditProjectModal projectID={currentProjectID} />
+          {/* <EditProjectModal projectID={currentProjectID} /> */}
         </div>
       </div>
     </>

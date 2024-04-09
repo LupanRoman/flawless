@@ -27,11 +27,11 @@ export default function LogIn() {
   return (
     <>
       <div className="flex h-[100svh] flex-col items-center justify-center bg-2BG/50 md:w-2/5 md:rounded-r-2xl">
-        <button className="flex items-center gap-6 rounded-lg bg-3BG px-[32px] py-[16px] text-xl font-bold text-textColor">
+        {/* <button className="flex items-center gap-6 rounded-lg bg-3BG px-[32px] py-[16px] text-xl font-bold text-textColor">
           <Image alt="log of google" width={30} height={30} src={googleIcon} />
           Continue with Google
         </button>
-        <p className="pb-[40px] pt-[20px] font-semibold text-textColor">or</p>
+        <p className="pb-[40px] pt-[20px] font-semibold text-textColor">or</p> */}
         <form
           autoComplete="off"
           action={signIn}

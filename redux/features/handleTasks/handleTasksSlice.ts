@@ -10,6 +10,8 @@ interface TasksState {
   taskGroup: string;
   setTaskGroupState: boolean;
   handleEditTaskModal: boolean;
+  taskStatus: string;
+  taskStatusModal: boolean;
 }
 
 const initialState: TasksState = {
@@ -21,6 +23,8 @@ const initialState: TasksState = {
   taskGroup: "",
   setTaskGroupState: false,
   handleEditTaskModal: false,
+  taskStatus: "To do",
+  taskStatusModal: false,
 };
 
 export const handleTasksSlice = createSlice({
@@ -54,6 +58,12 @@ export const handleTasksSlice = createSlice({
     handleEditTaskModal: (state, action) => {
       state.handleEditTaskModal = action.payload;
     },
+    setTaskStatus: (state, action) => {
+      state.taskStatus = action.payload;
+    },
+    handleTaskStatusModal: (state, action) => {
+      state.taskStatusModal = action.payload;
+    },
   },
 });
 
@@ -66,6 +76,8 @@ export const {
   setTaskGroup,
   handleTaskGroupState,
   handleEditTaskModal,
+  setTaskStatus,
+  handleTaskStatusModal,
 } = handleTasksSlice.actions;
 
 export const priorityFilterValue = (state: RootState): string => {
@@ -99,6 +111,14 @@ export const setTaskGroupModalValue = (state: RootState): boolean => {
 
 export const editTaskModalValue = (state: RootState): boolean => {
   return state.handleTaskSlice.handleEditTaskModal;
+};
+
+export const taskStatusValue = (state: RootState): string => {
+  return state.handleTaskSlice.taskStatus;
+};
+
+export const taskStatusModalValue = (state: RootState): boolean => {
+  return state.handleTaskSlice.taskStatusModal;
 };
 
 export default handleTasksSlice.reducer;
