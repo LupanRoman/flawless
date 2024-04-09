@@ -30,7 +30,10 @@ export default async function Hub() {
       <div className="relative">
         <TopBarHub email={user?.email} />
         <CreateProjectForm />
-        <RealtimeProjects serverProjects={Projects} favoriteProjects={FavoriteProjects} />
+        <RealtimeProjects
+          serverProjects={Projects}
+          favoriteProjects={FavoriteProjects}
+        />
       </div>
     </>
   );
