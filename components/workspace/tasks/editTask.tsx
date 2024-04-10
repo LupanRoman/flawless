@@ -67,16 +67,16 @@ function EditTask({ slug }: Props) {
   };
 
   // TODO Fast fix(make his function work with the main update function)
-  const updateStatus = async () => {
-    const supabase = createClient();
-    const { data, error } = await supabase
-      .from("Tasks")
-      .update({
-        status: taskStatus,
-      })
-      .eq("id", slug)
-      .select();
-  };
+  // const updateStatus = async () => {
+  //   const supabase = createClient();
+  //   const { data, error } = await supabase
+  //     .from("Tasks")
+  //     .update({
+  //       status: taskStatus,
+  //     })
+  //     .eq("id", slug)
+  //     .select();
+  // };
 
   const deleteTask = async () => {
     const supabase = createClient();
@@ -142,7 +142,7 @@ function EditTask({ slug }: Props) {
                           );
                         }}
                       >
-                        <p>{priority ? priority : taskPriority}</p>
+                        <p>{priority == "" ? priority : taskPriority}</p>
                         <SetPriority />
                       </div>
                     </div>
@@ -174,7 +174,7 @@ function EditTask({ slug }: Props) {
               <div className="flex w-full justify-end gap-4 pb-10 pr-5">
                 <button
                   onClick={() => {
-                    updateTask(title, status, priority, deadline, description);
+                    updateTask(title, priority, deadline, description, status);
                     router.back();
                   }}
                   className=" rounded-lg bg-brandColor px-3 py-2 font-medium"

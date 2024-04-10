@@ -1,11 +1,13 @@
 import React from "react";
 import SingleTask from "../tasks/singleTask";
+import Link from "next/link";
 
 type Props = {
   serverTasks: any;
+  projectID: number;
 };
 
-function MyTasks({ serverTasks }: Props) {
+function MyTasks({ serverTasks, projectID }: Props) {
   console.log(serverTasks);
 
   return (
@@ -22,19 +24,38 @@ function MyTasks({ serverTasks }: Props) {
               priority,
               id,
               project_id,
+              status,
             }: {
               title: string;
               priority: string;
               id: number;
               project_id: number;
+              status: string;
             }) => {
               return (
-                <SingleTask
-                  title={title}
-                  priority={priority}
-                  taskID={id}
-                  projectID={project_id}
-                />
+                <>
+                  {serverTasks.length <= 0 ? (
+                    <>
+                      <Link href={`/workspace/${projectID}/tasks`}>
+                        <button className="rounded-lg bg-brandColor px-3 py-1 text-lg font-medium">
+                          Add some tasks
+                        </button>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      {status == "Done" ? null : (
+                        <SingleTask
+                          title={title}
+                          priority={priority}
+                          taskID={id}
+                          projectID={project_id}
+                          status={"to do"}
+                        />
+                      )}
+                    </>
+                  )}
+                </>
               );
             },
           )}

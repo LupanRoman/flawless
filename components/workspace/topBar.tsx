@@ -44,18 +44,19 @@ function TopBar({}: Props) {
         </div>
         <div className="relative flex items-end justify-center gap-5 opacity-50">
           <button
+            className="relative"
             onClick={() => {
               dispatch(handleControlProjectModal(!controlProjectModalState));
             }}
           >
             <SettingsRoundedIcon />
+            <ControlProject />
           </button>
           <Link href={"/hub"}>
             <button>
               <LogoutRoundedIcon />
             </button>
           </Link>
-          <ControlProject />
           {/* <EditProjectModal projectID={currentProjectID} /> */}
         </div>
       </div>

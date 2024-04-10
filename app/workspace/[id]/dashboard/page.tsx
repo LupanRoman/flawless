@@ -19,7 +19,7 @@ async function page({ params: { id } }: { params: { id: number } }) {
   return (
     <>
       <div className="flex flex-col gap-5 md:flex-row">
-        <MyTasks serverTasks={Tasks} />
+        <MyTasks serverTasks={Tasks} projectID={id} />
         <ProjectState />
       </div>
     </>

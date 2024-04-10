@@ -7,13 +7,16 @@ type Props = {
   priority: string;
   taskID: number;
   projectID: number;
+  status: string;
 };
 
-function SingleTask({ title, priority, projectID, taskID }: Props) {
+function SingleTask({ title, priority, projectID, taskID, status }: Props) {
   return (
     <>
       <Link href={`/workspace/${projectID}/tasks/${taskID}`}>
-        <div className="relative flex cursor-pointer flex-col gap-5 rounded-lg bg-2BG px-3 py-2">
+        <div
+          className={`relative flex cursor-pointer flex-col gap-5 rounded-lg ${status == "To do" ? "bg-2BG" : status == "In progress" ? "bg-[#66A3FF1A]" : status == "Done" ? "bg-[#8AFF951A]" : "bg-2BG"} px-3 py-2`}
+        >
           <div className="flex">
             <p
               className={`${priority == "High" ? "text-highPriority" : priority == "Medium" ? "text-mediumPriority" : priority == "Low" ? "text-lowPriority" : "hidden"} absolute -top-1 right-4 rotate-90`}

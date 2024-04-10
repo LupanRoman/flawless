@@ -20,6 +20,7 @@ function FavoriteProjectsList({ favoriteProjects }: Props) {
                   projectID={favoriteProject.id}
                   isFavorite={favoriteProject.favorite}
                   key={favoriteProject.id}
+                  deadline={favoriteProject.deadline}
                   renderedIn="favorites"
                 />
               </>

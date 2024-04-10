@@ -1,15 +1,23 @@
 import Link from "next/link";
 import React from "react";
 import BookmarkRoundedIcon from "@mui/icons-material/BookmarkRounded";
+import DaysLeft from "./daysLeft";
 
 type Props = {
   title: string;
   projectID: string;
   isFavorite: boolean;
   renderedIn: string;
+  deadline: string;
 };
 
-function ProjectCard({ title, projectID, isFavorite, renderedIn }: Props) {
+function ProjectCard({
+  title,
+  projectID,
+  isFavorite,
+  renderedIn,
+  deadline,
+}: Props) {
   const setToLocal = () => {
     localStorage.setItem("projectID", JSON.stringify(projectID));
   };
@@ -29,6 +37,9 @@ function ProjectCard({ title, projectID, isFavorite, renderedIn }: Props) {
               </p>
             ) : null}
             <h1 className="text-base font-medium">{title}</h1>
+            <div className="absolute bottom-1 right-1">
+              <DaysLeft deadline={deadline} renderedIn="projectCard" />
+            </div>
           </div>
         </Link>
       </div>

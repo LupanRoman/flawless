@@ -1,3 +1,4 @@
+import DaysLeft from "@/components/hub/daysLeft";
 import CompletedTasks from "@/components/workspace/analytics/completedTasks";
 import TotalTasks from "@/components/workspace/analytics/totalTasks";
 import UncompletedTasks from "@/components/workspace/analytics/uncompletedTasks";
@@ -20,6 +21,11 @@ async function page({ params: { id } }: { params: { id: number } }) {
     .eq("project_id", id)
     .eq("status", "Done");
 
+  const { data: Project } = await supabase
+    .from("Projects")
+    .select("*")
+    .eq("id", id);
+
   // const { data: Uncompleted } = await supabase
   //   .from("Tasks")
   //   .select("*")
@@ -31,6 +37,7 @@ async function page({ params: { id } }: { params: { id: number } }) {
       <div className="flex w-full flex-col items-center gap-5 md:flex-row">
         <TotalTasks tasks={Tasks} />
         <CompletedTasks completedTasks={CompletedTasksList} />
+        <DaysLeft deadline={Project![0].deadline} renderedIn="analytics" />
         {/* <UncompletedTasks uncompletedTasks={Uncompleted} /> */}
       </div>
     </>

@@ -21,7 +21,10 @@ function TasksList({ serverTasks, projectID }: Props) {
         "postgres_changes",
         { event: "*", schema: "public", table: "Tasks" },
         async () => {
-          const { data: Tasks } = await supabase.from("Tasks").select("*");
+          const { data: Tasks } = await supabase
+            .from("Tasks")
+            .select("*")
+            .eq("project_id", projectID);
           setTasksList(Tasks);
         },
       )
@@ -77,7 +80,7 @@ function TasksList({ serverTasks, projectID }: Props) {
     <>
       <div className="flex w-full flex-col gap-10">
         {/* <Filters groups={groupList} /> */}
-        <div className="horizontal flex snap-x gap-3 overflow-x-auto md:h-full md:overflow-x-hidden">
+        <div className="horizontal flex snap-x gap-3 overflow-x-auto md:h-full md:overflow-x-hidden md:pr-10 lg:pr-44">
           {Boards.map((board) => {
             return (
               <>
@@ -100,6 +103,7 @@ function TasksList({ serverTasks, projectID }: Props) {
                               key={task.id}
                               projectID={projectID}
                               taskID={task.id}
+                              status={task.status}
                             />
                           ) : null}
                         </>
