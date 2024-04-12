@@ -5,6 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import googleIcon from "@/public/google.png";
+import signUpBg from "@/public/signUpBg.png";
 
 export default function SignUp({
   searchParams,
@@ -34,14 +35,36 @@ export default function SignUp({
     return redirect("/login?message=Check email to continue sign in process");
   };
 
+  const signUpWithGoogle = async () => {
+    "use server";
+    const origin = headers().get("origin");
+    const supabase = createClient();
+
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${origin}/auth/callback`,
+      },
+    });
+    console.log(data);
+    redirect(data.url || "");
+  };
+
   return (
     <>
       <div className="flex h-[100svh] flex-col items-center justify-center bg-2BG/50 md:w-2/5 md:rounded-r-2xl">
-        {/* <button className="flex items-center bg-3BG gap-6 rounded-lg px-[32px] py-[16px] text-xl font-bold text-textColor">
-          <Image alt="log of google" width={30} height={30} src={googleIcon} />
-          Continue with Google
-        </button>
-        <p className="pb-[40px] pt-[20px] font-semibold text-textColor">or</p> */}
+        <form action={signUpWithGoogle}>
+          <button className="flex items-center gap-6 rounded-lg bg-3BG px-[32px] py-[16px] text-xl font-bold text-textColor">
+            <Image
+              alt="logo of google"
+              width={30}
+              height={30}
+              src={googleIcon}
+            />
+            Continue with Google
+          </button>
+        </form>
+        <p className="pb-[40px] pt-[20px] font-semibold text-textColor">or</p>
         <form
           autoComplete="off"
           action={signUp}
@@ -78,6 +101,13 @@ export default function SignUp({
             </p>
           )}
         </form>
+        <Image
+          src={signUpBg}
+          fill={true}
+          style={{ objectFit: "contain" }}
+          alt="a background image for esthetics"
+          className="absolute -z-50"
+        />
       </div>
     </>
   );

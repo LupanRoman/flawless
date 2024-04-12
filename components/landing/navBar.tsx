@@ -10,8 +10,8 @@ function NavBar({}: Props) {
         <h1 className="font-bold md:pl-10 md:text-3xl">Flawless</h1>
         <div className="flex items-center gap-4 md:gap-7 md:pr-10">
           <Link href={"/auth/signUp"}>
-            <button className="rounded-[10px] bg-brandColor px-3 py-1 font-medium md:px-5 md:py-[10px] md:text-base">
-              Sign up
+            <button className="rounded-[10px] bg-gradient-to-r from-gradientLeft to-gradientRight px-3 py-1 font-medium md:px-5 md:py-[10px] md:text-base">
+              Get started
             </button>
           </Link>
           <Link href={"/auth/login"}>
