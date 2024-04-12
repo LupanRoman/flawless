@@ -35,7 +35,7 @@ export default function LogIn() {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${origin}/auth/callback`,
+        redirectTo: `https://flawless-omega.vercel.app/auth/callback`,
       },
     });
     console.log(data);
