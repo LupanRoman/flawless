@@ -27,25 +27,25 @@ export default function LogIn() {
     return redirect("https://flawless-omega.vercel.app/hub");
   };
 
-  const signInWithGoogle = async () => {
-    "use server";
-    const origin = headers().get("origin");
-    const supabase = createClient();
+  // const signInWithGoogle = async () => {
+  //   "use server";
+  //   const origin = headers().get("origin");
+  //   const supabase = createClient();
 
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `https://flawless-omega.vercel.app/auth/callback`,
-      },
-    });
-    console.log(data);
-    redirect(data.url || "");
-  };
+  //   const { data, error } = await supabase.auth.signInWithOAuth({
+  //     provider: "google",
+  //     options: {
+  //       redirectTo: `https://flawless-omega.vercel.app/auth/callback`,
+  //     },
+  //   });
+  //   console.log(data);
+  //   redirect(data.url || "");
+  // };
 
   return (
     <>
       <div className="flex h-[100svh] flex-col items-center justify-center bg-2BG/50 md:w-2/5 md:rounded-r-2xl">
-        <form action={signInWithGoogle}>
+        {/* <form action={signInWithGoogle}>
           <button className="flex items-center gap-6 rounded-lg bg-3BG px-[32px] py-[16px] text-xl font-bold text-textColor">
             <Image
               alt="log of google"
@@ -55,7 +55,7 @@ export default function LogIn() {
             />
             Continue with Google
           </button>
-        </form>
+        </form> */}
         <p className="pb-[40px] pt-[20px] font-semibold text-textColor">or</p>
         <form
           autoComplete="off"
