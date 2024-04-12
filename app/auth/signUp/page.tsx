@@ -24,7 +24,7 @@ export default function SignUp({
       email,
       password,
       options: {
-        emailRedirectTo: `${origin}/auth/callback`,
+        emailRedirectTo: `https://flawless-omega.vercel.app/hub`,
       },
     });
 
@@ -43,7 +43,7 @@ export default function SignUp({
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${origin}/auth/callback`,
+        redirectTo: `https://flawless-omega.vercel.app/hub`,
       },
     });
     console.log(data);
