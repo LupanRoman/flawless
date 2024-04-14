@@ -29,10 +29,12 @@ export default function SignUp({
     });
 
     if (error) {
-      return redirect("/sigUp?message=Could not authenticate user");
+      return redirect("auth/sigUp?message=Could not authenticate user");
     }
 
-    return redirect("/signUp?message=Check email to continue sign in process");
+    return redirect(
+      "/auth/signUp?message=Check email to continue sign in process",
+    );
   };
 
   const signUpWithGoogle = async () => {
