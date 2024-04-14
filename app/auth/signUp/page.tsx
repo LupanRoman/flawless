@@ -29,7 +29,7 @@ export default function SignUp({
     });
 
     if (error) {
-      return redirect("/login?message=Could not authenticate user");
+      return redirect("/sigUp?message=Could not authenticate user");
     }
 
     return redirect("/signUp?message=Check email to continue sign in process");
