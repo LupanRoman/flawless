@@ -24,7 +24,7 @@ export default function SignUp({
       email,
       password,
       options: {
-        emailRedirectTo: `https://flawless-omega.vercel.app/auth/callback`,
+        emailRedirectTo: `${origin}/auth/callback`,
       },
     });
 
@@ -32,7 +32,7 @@ export default function SignUp({
       return redirect("/login?message=Could not authenticate user");
     }
 
-    return redirect("/login?message=Check email to continue sign in process");
+    return redirect("/signUp?message=Check email to continue sign in process");
   };
 
   const signUpWithGoogle = async () => {
