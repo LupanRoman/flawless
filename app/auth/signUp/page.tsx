@@ -46,7 +46,6 @@ export default function SignUp({
         redirectTo: `${origin}/auth/callback`,
       },
     });
-    console.log(origin);
     redirect(data.url || "");
   };
 
@@ -96,7 +95,7 @@ export default function SignUp({
             </Link>
           </div>
           {searchParams?.message && (
-            <p className="bg-foreground/10 text-foreground mt-4 p-4 text-center">
+            <p className="mt-4 bg-3BG/20 p-4 text-center text-textColor/50">
               {searchParams.message}
             </p>
           )}

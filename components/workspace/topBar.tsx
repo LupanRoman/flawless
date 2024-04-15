@@ -10,10 +10,14 @@ import {
 } from "@/redux/features/handleProjects/handleProjectSlice";
 import ControlProject from "@/redux/features/handleProjects/controlProject";
 import EditProjectModal from "@/redux/features/handleProjects/editProjectModal";
+import { User } from "@supabase/supabase-js";
+import Image from "next/image";
 
-type Props = {};
+type Props = {
+  user: User;
+};
 
-function TopBar({}: Props) {
+function TopBar({ user }: Props) {
   const [greeting, setGreeting] = useState("");
   useEffect(() => {
     const now = new Date();
@@ -34,22 +38,31 @@ function TopBar({}: Props) {
   useEffect(() => {
     const projectID = JSON.parse(localStorage.getItem("projectID") || "");
     setCurrentProjectID(projectID);
+    console.log(user);
   }, []);
 
   return (
     <>
       <div className="flex h-[10svh] w-full items-center justify-end px-4 lg:h-full lg:justify-between lg:px-8">
-        <div className="hidden flex-col lg:flex ">
-          <h1 className="text-lg font-medium">{greeting}</h1>
+        <div className="hidden flex-col text-sm font-medium lg:flex">
+          <h2>{greeting}</h2>
+          <p className="text-lg">{user.user_metadata.full_name}</p>
         </div>
-        <div className="relative flex items-end justify-center gap-5 opacity-50">
+        <div className="relative flex items-center justify-center gap-5 opacity-50">
           <button
             className="relative"
             onClick={() => {
               dispatch(handleControlProjectModal(!controlProjectModalState));
             }}
           >
-            <SettingsRoundedIcon />
+            <Image
+              src={user.user_metadata.picture}
+              width={30}
+              height={30}
+              alt="user profile picture"
+              className="rounded-full"
+            />
+            {/* <SettingsRoundedIcon /> */}
             <ControlProject />
           </button>
           <Link href={"/hub"}>

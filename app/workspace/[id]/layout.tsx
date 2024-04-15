@@ -38,7 +38,7 @@ export default async function RootLayout({
         >
           {/* <header> */}
           <div className="lg:col-start-2 lg:col-end-7 lg:row-span-1">
-            <TopBar />
+            <TopBar user={user} />
           </div>
           {/* </header> */}
           <main className="px-4 lg:col-start-2 lg:col-end-7 lg:row-start-2 lg:row-end-11 lg:px-8">
