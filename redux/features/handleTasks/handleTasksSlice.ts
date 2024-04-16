@@ -9,9 +9,11 @@ interface TasksState {
   groupFilter: string;
   taskGroup: string;
   setTaskGroupState: boolean;
+  createGroupModalState: boolean;
   handleEditTaskModal: boolean;
   taskStatus: string;
   taskStatusModal: boolean;
+  workspaceActions: boolean;
 }
 
 const initialState: TasksState = {
@@ -22,9 +24,11 @@ const initialState: TasksState = {
   groupFilter: "",
   taskGroup: "",
   setTaskGroupState: false,
+  createGroupModalState: false,
   handleEditTaskModal: false,
   taskStatus: "To do",
   taskStatusModal: false,
+  workspaceActions: false,
 };
 
 export const handleTasksSlice = createSlice({
@@ -64,6 +68,12 @@ export const handleTasksSlice = createSlice({
     handleTaskStatusModal: (state, action) => {
       state.taskStatusModal = action.payload;
     },
+    handleWorkspaceActions: (state, action) => {
+      state.workspaceActions = action.payload;
+    },
+    handleCreateTaskGroupModal: (state, action) => {
+      state.createGroupModalState = action.payload;
+    },
   },
 });
 
@@ -78,6 +88,8 @@ export const {
   handleEditTaskModal,
   setTaskStatus,
   handleTaskStatusModal,
+  handleWorkspaceActions,
+  handleCreateTaskGroupModal,
 } = handleTasksSlice.actions;
 
 export const priorityFilterValue = (state: RootState): string => {
@@ -119,6 +131,14 @@ export const taskStatusValue = (state: RootState): string => {
 
 export const taskStatusModalValue = (state: RootState): boolean => {
   return state.handleTaskSlice.taskStatusModal;
+};
+
+export const workspaceActionsModalState = (state: RootState): boolean => {
+  return state.handleTaskSlice.workspaceActions;
+};
+
+export const createGroupModalValue = (state: RootState): boolean => {
+  return state.handleTaskSlice.createGroupModalState;
 };
 
 export default handleTasksSlice.reducer;

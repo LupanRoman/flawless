@@ -15,7 +15,7 @@ async function Filters({}: Props) {
         <div className="flex items-center gap-3">
           <PriorityFilter />
         </div>
-        <CreateTaskBtn />
+        <CreateTaskBtn renderedIn="tasksPage" />
       </div>
     </>
   );

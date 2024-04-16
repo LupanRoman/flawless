@@ -26,12 +26,9 @@ export default async function RootLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (user) {
-    return redirect('/hub')
-  } else if (!user) {
+  if (!user) {
     return redirect("/login");
   }
-
 
   return (
     <html lang="en" className={inter.className}>

@@ -5,22 +5,39 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import {
   createTaskModalValue,
   handleCreateTaskModalState,
+  handleWorkspaceActions,
+  workspaceActionsModalState,
 } from "./handleTasksSlice";
-type Props = {};
+type Props = {
+  renderedIn: string;
+};
 
-function CreateTaskBtn({}: Props) {
+function CreateTaskBtn({ renderedIn }: Props) {
   const dispatch = useAppDispatch();
+  const workspaceActions = useAppSelector(workspaceActionsModalState);
+  
   return (
     <>
-      <div>
-        <button
-          onClick={() => {
-            dispatch(handleCreateTaskModalState(true));
-          }}
-          className="rounded-xl bg-brandColor px-2 py-2"
-        >
-          <AddRoundedIcon />
-        </button>
+      <div
+        className="cursor-pointer"
+        onClick={() => {
+          dispatch(handleCreateTaskModalState(true));
+        }}
+      >
+        {renderedIn == "tasksPage" ? (
+          <button className="rounded-xl bg-brandColor px-2 py-2">
+            <AddRoundedIcon />
+          </button>
+        ) : (
+          <button
+            onClick={() => {
+              dispatch(handleWorkspaceActions(!workspaceActions));
+            }}
+            className="rounded-lg px-2 py-1 text-start text-xs font-medium hover:bg-4BG"
+          >
+            Create task
+          </button>
+        )}
       </div>
     </>
   );

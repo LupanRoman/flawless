@@ -5,6 +5,7 @@ import SpaceDashboardOutlinedIcon from "@mui/icons-material/SpaceDashboardOutlin
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import DonutLargeRoundedIcon from "@mui/icons-material/DonutLargeRounded";
 import HandleActions from "./handleActions";
+import CreateGroupForm from "@/redux/features/handleTasks/handleGroups/createGroupForm";
 
 type Props = {};
 
@@ -19,8 +20,8 @@ function SideBar({}: Props) {
   // TODO Create a new file and create a link component => send props to that link and render here to make the code cleaner
   return (
     <>
-      <div className="relative justify-center flex items-center bg-2BG py-5 lg:h-full lg:max-w-[200px] lg:flex-col lg:items-start lg:justify-normal lg:gap-5 lg:px-3 lg:py-0">
-        <div className="flex items-center  w-full lg:h-full justify-around lg:max-w-[200px] lg:flex-col lg:items-start lg:justify-normal lg:gap-5 lg:px-2 lg:py-0 lg:pt-20">
+      <div className="relative flex items-center justify-center bg-2BG py-5 lg:h-full lg:max-w-[200px] lg:flex-col lg:items-start lg:justify-normal lg:gap-5 lg:px-3 lg:py-0">
+        <div className="flex w-full items-center justify-around lg:h-full lg:max-w-[200px] lg:flex-col lg:items-start lg:justify-normal lg:gap-5 lg:px-2 lg:py-0 lg:pt-20">
           <Link
             onClick={() => {
               setActiveLink("Dashboard");
@@ -64,7 +65,10 @@ function SideBar({}: Props) {
             </button>
           </Link>
         </div>
-        {/* <HandleActions /> */}
+        <div className="absolute -top-7 flex w-[200px] items-center justify-center md:relative md:w-full md:pb-20">
+          <HandleActions />
+          <CreateGroupForm />
+        </div>
       </div>
     </>
   );

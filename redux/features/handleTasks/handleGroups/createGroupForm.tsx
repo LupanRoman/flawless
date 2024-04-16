@@ -1,15 +1,19 @@
 "use client";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { createClient } from "@/utils/supabase/client";
 import React, { useEffect, useState } from "react";
+import {
+  createGroupModalValue,
+  handleCreateTaskGroupModal,
+} from "../handleTasksSlice";
 
-type Props = {
-  setCreateGroupForm: (value: boolean) => void;
-};
+type Props = {};
 
-function CreateGroupForm({ setCreateGroupForm }: Props) {
+function CreateGroupForm({}: Props) {
   const [groupTitle, setGroupTitle] = useState("");
   const [currentProjectID, setCurrentProjectID] = useState(Number);
-
+  const createGroupModal = useAppSelector(createGroupModalValue);
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const projectID = JSON.parse(localStorage.getItem("projectID") || "");
     setCurrentProjectID(projectID);
@@ -23,9 +27,9 @@ function CreateGroupForm({ setCreateGroupForm }: Props) {
       .select();
   };
 
-  return (
+  return createGroupModal ? (
     <>
-      <div className="absolute bottom-0 left-0 right-0 top-0 z-30 flex flex-col justify-between rounded-lg bg-3BG">
+      <div className="absolute -top-28 left-0 right-0 z-30 flex h-[100px] flex-col justify-between rounded-lg bg-3BG">
         <input
           type="text"
           placeholder="Group name"
@@ -38,7 +42,7 @@ function CreateGroupForm({ setCreateGroupForm }: Props) {
           <button
             onClick={() => {
               createGroup();
-              setCreateGroupForm(false);
+              dispatch(handleCreateTaskGroupModal(!createGroupModal));
             }}
             className="rounded-lg bg-4BG px-3 py-1 text-sm font-medium"
           >
@@ -46,7 +50,7 @@ function CreateGroupForm({ setCreateGroupForm }: Props) {
           </button>
           <button
             onClick={() => {
-              setCreateGroupForm(false);
+              dispatch(handleCreateTaskGroupModal(!createGroupModal));
             }}
             className="text-sm font-medium text-textColor/50"
           >
@@ -55,7 +59,7 @@ function CreateGroupForm({ setCreateGroupForm }: Props) {
         </div>
       </div>
     </>
-  );
+  ) : null;
 }
 
 export default CreateGroupForm;

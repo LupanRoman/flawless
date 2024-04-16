@@ -1,34 +1,50 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import { useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import CreateTaskBtn from "@/redux/features/handleTasks/createTaskBtn";
+import {
+  createGroupModalValue,
+  handleCreateTaskGroupModal,
+  handleWorkspaceActions,
+  workspaceActionsModalState,
+} from "@/redux/features/handleTasks/handleTasksSlice";
 type Props = {};
 
 function HandleActions({}: Props) {
   const dispatch = useAppDispatch();
-  const [showActions, setShowActions] = useState(false);
-  
+  const workspaceActions = useAppSelector(workspaceActionsModalState);
+  const createGroupModal = useAppSelector(createGroupModalValue);
   return (
     <>
       <div
         onClick={() => {
-          setShowActions(!showActions);
+          dispatch(handleWorkspaceActions(!workspaceActions));
         }}
-        className="absolute -top-8 cursor-pointer rounded-full bg-brandColor px-2 py-2 font-medium md:static md:rounded-lg"
+        className="relative cursor-pointer rounded-full bg-brandColor px-2 py-2 text-sm font-medium md:static md:rounded-lg"
       >
         <p className="hidden md:flex">Create</p>
         <p className="flex md:hidden">
           <AddRoundedIcon />
         </p>
+
+        {workspaceActions ? (
+          <div className="absolute -left-20 -top-12 flex w-[200px] flex-col items-start gap-2 rounded-lg bg-3BG px-2 py-2 md:-top-12 md:left-0 md:w-full">
+            {/* <CreateTaskBtn renderedIn="sideBar" /> */}
+            <button
+              onClick={() => {
+                dispatch(handleCreateTaskGroupModal(!createGroupModal));
+              }}
+              className="rounded-lg px-2 py-1 text-start text-xs font-medium hover:bg-4BG"
+            >
+              Create group
+            </button>
+            {/* <button className="rounded-lg px-2 py-1 text-start text-xs font-medium hover:bg-4BG">
+            Add member
+          </button> */}
+          </div>
+        ) : null}
       </div>
-      {showActions ? (
-        <div className="absolute -top-32 flex flex-col items-start gap-4 rounded-lg bg-2BG px-2 py-2">
-          {/* <CreateTaskBtn /> */}
-          <button>Create group</button>
-          <button>Add member</button>
-        </div>
-      ) : null}
     </>
   );
 }
