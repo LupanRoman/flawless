@@ -17,9 +17,9 @@ function TopBarHub({ email }: Props) {
 
   return (
     <>
-      <div className="bg-2BG h-[10vh] rounded-b-[40px] px-5 flex items-center justify-between">
-        <h1 className="font-bold text-2xl">Flawless</h1>
-        <div className="flex gap-3 items-center md:gap-7">
+      <div className="flex h-[10vh] items-center justify-between rounded-b-[40px] bg-2BG px-5 md:px-10">
+        <h1 className="text-2xl font-bold">Flawless</h1>
+        <div className="flex items-center gap-3 md:gap-7">
           {/* <button>{email}</button> */}
           <CreateProjectBtn />
           <form action={signOut}>

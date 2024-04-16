@@ -34,14 +34,12 @@ export default async function RootLayout({
     <html lang="en" className={inter.className}>
       <ReduxProvider>
         <body
-          className={`relative flex h-[100svh] flex-col bg-mainBG text-textColor md:max-h-[100vh] lg:grid lg:grid-cols-6 lg:grid-rows-10`}
+          className={`relative flex h-[100svh] flex-col bg-mainBG text-textColor md:max-h-[100vh] lg:grid lg:grid-cols-8 lg:grid-rows-10`}
         >
-          {/* <header> */}
-          <div className="lg:col-start-2 lg:col-end-7 lg:row-span-1">
+          <div className="lg:col-start-2 lg:col-end-9 lg:row-span-1">
             <TopBar user={user} />
           </div>
-          {/* </header> */}
-          <main className="px-4 lg:col-start-2 lg:col-end-7 lg:row-start-2 lg:row-end-11 lg:px-8">
+          <main className=" px-4 md:px-8 lg:col-start-2 lg:col-end-9 lg:row-start-2 lg:row-end-11">
             {modal}
             {children}
           </main>

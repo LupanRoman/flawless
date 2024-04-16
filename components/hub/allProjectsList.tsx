@@ -16,7 +16,7 @@ function AllProjectsList({ projects }: Props) {
   return (
     <>
       <div className="flex flex-col gap-5 pb-2">
-        <h1 className="text-lg font-medium">All projects</h1>
+        <h1 className="text-base font-medium">All projects</h1>
         <div className="flex w-full flex-col flex-wrap items-center gap-3 md:flex-row">
           {projects.length <= 0 ? (
             <button

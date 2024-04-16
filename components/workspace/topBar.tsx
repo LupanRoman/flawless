@@ -43,12 +43,12 @@ function TopBar({ user }: Props) {
 
   return (
     <>
-      <div className="flex h-[10svh] w-full items-center justify-end px-4 lg:h-full lg:justify-between lg:px-8">
+      <div className="flex h-[10svh] w-full items-center justify-end px-4 md:px-8 lg:h-full lg:justify-between">
         <div className="hidden flex-col text-sm font-medium lg:flex">
           <h2>{greeting}</h2>
           <p className="text-lg">{user.user_metadata.full_name}</p>
         </div>
-        <div className="relative flex items-center justify-center gap-5 opacity-50">
+        <div className="relative flex items-center justify-center gap-5">
           <button
             className="relative"
             onClick={() => {

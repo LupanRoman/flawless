@@ -8,7 +8,9 @@ import {
   TaskPriorityValue,
   handleSetTaskPriorityState,
   handleTaskStatusModal,
+  setTaskPriority,
   setTaskPriorityModalValue,
+  setTaskStatus,
   taskStatusModalValue,
   taskStatusValue,
 } from "@/redux/features/handleTasks/handleTasksSlice";
@@ -41,6 +43,7 @@ function EditTask({ slug }: Props) {
         .select("*")
         .eq("id", slug);
       setTask(Task);
+      console.log(Task);
     };
     getTask();
   }, []);
@@ -65,18 +68,6 @@ function EditTask({ slug }: Props) {
       .eq("id", slug)
       .select();
   };
-
-  // TODO Fast fix(make his function work with the main update function)
-  // const updateStatus = async () => {
-  //   const supabase = createClient();
-  //   const { data, error } = await supabase
-  //     .from("Tasks")
-  //     .update({
-  //       status: taskStatus,
-  //     })
-  //     .eq("id", slug)
-  //     .select();
-  // };
 
   const deleteTask = async () => {
     const supabase = createClient();
@@ -125,7 +116,8 @@ function EditTask({ slug }: Props) {
                   </div>
                   <input
                     type="text"
-                    placeholder={title}
+                    // placeholder={title}
+                    value={taskTitle == "" ? title : taskTitle}
                     className="bg-transparent text-xl font-medium outline-none"
                     onChange={(e) => {
                       setTaskTitle(e.target.value);
@@ -133,7 +125,14 @@ function EditTask({ slug }: Props) {
                   />
                   <div className="flex flex-col gap-4">
                     <div className="flex items-center gap-2">
-                      <p>Priority:</p>
+                      <p
+                        onClick={() => {
+                          console.log(priority);
+                          console.log(taskPriority);
+                        }}
+                      >
+                        Priority:
+                      </p>
                       <div
                         className="relative w-[150px] cursor-pointer rounded-lg bg-3BG px-3 py-1"
                         onClick={() => {
@@ -142,7 +141,7 @@ function EditTask({ slug }: Props) {
                           );
                         }}
                       >
-                        <p>{priority == "" ? priority : taskPriority}</p>
+                        <p>{taskPriority == "" ? priority : taskPriority}</p>
                         <SetPriority />
                       </div>
                     </div>
@@ -151,7 +150,7 @@ function EditTask({ slug }: Props) {
                       <input
                         className="cursor-pointer bg-transparent text-textColor"
                         type="date"
-                        value={deadline}
+                        value={taskDeadline == "" ? deadline : taskDeadline}
                         onChange={(e) => {
                           setTaskDeadline(e.target.value);
                         }}
@@ -166,7 +165,7 @@ function EditTask({ slug }: Props) {
                         setTaskDescription(e.target.value);
                       }}
                     >
-                      {description}
+                      {taskDescription == "" ? description : taskDescription}
                     </textarea>
                   </div>
                 </div>
@@ -175,6 +174,11 @@ function EditTask({ slug }: Props) {
                 <button
                   onClick={() => {
                     updateTask(title, priority, deadline, description, status);
+                    dispatch(setTaskStatus(""));
+                    setTaskTitle("");
+                    dispatch(setTaskPriority(""));
+                    setTaskDeadline("");
+                    setTaskDescription("");
                     router.back();
                   }}
                   className=" rounded-lg bg-brandColor px-3 py-2 font-medium"

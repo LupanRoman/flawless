@@ -10,7 +10,9 @@ import {
   handleSetTaskPriorityState,
   handleTaskGroupState,
   setTaskGroupModalValue,
+  setTaskPriority,
   setTaskPriorityModalValue,
+  setTaskStatus,
 } from "./handleTasksSlice";
 import SetPriority from "./setPriority";
 import { createClient } from "@/utils/supabase/client";
@@ -123,6 +125,11 @@ function CreateTaskForm({ projectID }: Props) {
             onClick={() => {
               createTask();
               dispatch(handleCreateTaskModalState(!createTaskModal));
+              dispatch(setTaskStatus(""));
+              setTaskTitle("");
+              dispatch(setTaskPriority(""));
+              setTaskDeadline("");
+              setTaskDescription("");
             }}
             className=" rounded-lg bg-brandColor px-3 py-2 font-bold"
           >

@@ -80,7 +80,8 @@ function TasksList({ serverTasks, projectID }: Props) {
     <>
       <div className="flex w-full flex-col gap-10">
         {/* <Filters groups={groupList} /> */}
-        <div className="horizontal flex snap-x gap-3 overflow-x-auto md:h-full md:overflow-x-hidden md:pr-10 lg:pr-44">
+        {/* Put pr for the boards */}
+        <div className="horizontal flex snap-x gap-3 overflow-x-auto md:h-full md:overflow-x-hidden md:pr-10">
           {Boards.map((board) => {
             return (
               <>

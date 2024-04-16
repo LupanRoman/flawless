@@ -20,7 +20,7 @@ function SideBar({}: Props) {
   return (
     <>
       <div className="relative justify-center flex items-center bg-2BG py-5 lg:h-full lg:max-w-[200px] lg:flex-col lg:items-start lg:justify-normal lg:gap-5 lg:px-3 lg:py-0">
-        <div className="flex items-center  w-full lg:h-full justify-around lg:max-w-[200px] lg:flex-col lg:items-start lg:justify-normal lg:gap-5 lg:px-3 lg:py-0 lg:pt-20">
+        <div className="flex items-center  w-full lg:h-full justify-around lg:max-w-[200px] lg:flex-col lg:items-start lg:justify-normal lg:gap-5 lg:px-2 lg:py-0 lg:pt-20">
           <Link
             onClick={() => {
               setActiveLink("Dashboard");
@@ -28,9 +28,9 @@ function SideBar({}: Props) {
             href={`/workspace/${currentProjectID}/dashboard`}
             className={`${
               activeLink == "Dashboard" ? "bg-brandColor" : "bg-transparent"
-            } rounded-full px-[20px] py-[10px] lg:w-full lg:rounded-lg lg:px-4`}
+            } rounded-full px-[20px] py-[6px] lg:w-full lg:rounded-lg lg:px-4`}
           >
-            <button className="items-center gap-2 text-lg font-medium lg:flex">
+            <button className="items-center gap-2 text-sm font-medium lg:flex">
               <SpaceDashboardOutlinedIcon />
               <p className="hidden lg:flex">Dashboard</p>
             </button>
@@ -42,9 +42,9 @@ function SideBar({}: Props) {
             }}
             className={`${
               activeLink == "Tasks" ? "bg-brandColor" : "bg-transparent"
-            } rounded-full px-[20px] py-[10px] lg:w-full lg:rounded-lg lg:px-4`}
+            } rounded-full px-[20px] py-[6px] lg:w-full lg:rounded-lg lg:px-4`}
           >
-            <button className="items-center gap-2 text-lg font-medium  lg:flex">
+            <button className="items-center gap-2 text-sm font-medium  lg:flex">
               <CheckCircleOutlineRoundedIcon />
               <p className="hidden lg:flex">Tasks</p>
             </button>
@@ -56,9 +56,9 @@ function SideBar({}: Props) {
             }}
             className={`${
               activeLink == "Analytics" ? "bg-brandColor" : "bg-transparent"
-            } rounded-full px-[20px] py-[10px] lg:w-full lg:rounded-lg lg:px-4`}
+            } rounded-full px-[20px] py-[6px] lg:w-full lg:rounded-lg lg:px-4`}
           >
-            <button className="items-center gap-2 text-lg font-medium  lg:flex">
+            <button className="items-center gap-2 text-sm font-medium  lg:flex">
               <DonutLargeRoundedIcon />
               <p className="hidden lg:flex">Analytics</p>
             </button>

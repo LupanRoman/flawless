@@ -16,6 +16,7 @@ function EditTaskStatus({}: Props) {
     <>
       <div className="absolute top-10 z-20 flex flex-col items-start gap-2 rounded-lg bg-3BG px-2 py-1">
         <button
+          className="w-full text-start"
           onClick={() => {
             dispatch(setTaskStatus("To do"));
             dispatch(handleTaskStatusModal(!taskStatusModal));
@@ -24,6 +25,7 @@ function EditTaskStatus({}: Props) {
           To do
         </button>
         <button
+          className="w-full text-start"
           onClick={() => {
             dispatch(setTaskStatus("In progress"));
             dispatch(handleTaskStatusModal(!taskStatusModal));
@@ -32,6 +34,7 @@ function EditTaskStatus({}: Props) {
           In progress
         </button>
         <button
+          className="w-full text-start"
           onClick={() => {
             dispatch(setTaskStatus("Done"));
             dispatch(handleTaskStatusModal(!taskStatusModal));
