@@ -21,7 +21,7 @@ function HandleActions({}: Props) {
         onClick={() => {
           dispatch(handleWorkspaceActions(!workspaceActions));
         }}
-        className="relative cursor-pointer rounded-full bg-brandColor px-2 py-2 text-sm font-medium md:static md:rounded-lg"
+        className="relative cursor-pointer rounded-full bg-brandColor px-4 py-1 text-sm font-medium md:static md:rounded-lg"
       >
         <p className="hidden md:flex">Create</p>
         <p className="flex md:hidden">
@@ -29,13 +29,13 @@ function HandleActions({}: Props) {
         </p>
 
         {workspaceActions ? (
-          <div className="absolute -left-20 -top-12 flex w-[200px] flex-col items-start gap-2 rounded-lg bg-3BG px-2 py-2 md:-top-12 md:left-0 md:w-full">
-            {/* <CreateTaskBtn renderedIn="sideBar" /> */}
+          <div className="absolute -left-20 -top-20 flex w-[200px] flex-col items-start gap-2 rounded-lg bg-3BG px-2 py-2 md:-top-20 md:left-0 md:w-full">
+            <CreateTaskBtn renderedIn="sideBar" />
             <button
               onClick={() => {
                 dispatch(handleCreateTaskGroupModal(!createGroupModal));
               }}
-              className="rounded-lg px-2 py-1 text-start text-xs font-medium hover:bg-4BG"
+              className="w-full rounded-lg px-2 py-1 text-start text-xs font-medium hover:bg-4BG"
             >
               Create group
             </button>

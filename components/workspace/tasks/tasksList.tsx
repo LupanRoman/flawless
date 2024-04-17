@@ -7,9 +7,9 @@ import React, { useEffect, useState } from "react";
 import SingleTask from "./singleTask";
 import Filters from "./filters";
 
-type Props = { serverTasks: any; projectID: number };
+type Props = { serverTasks: any; projectID: number; groups: any };
 
-function TasksList({ serverTasks, projectID }: Props) {
+function TasksList({ serverTasks, projectID, groups }: Props) {
   const [tasksList, setTasksList] = useState(serverTasks);
   const priorityFilter = useAppSelector(priorityFilterValue);
 
@@ -95,9 +95,6 @@ function TasksList({ serverTasks, projectID }: Props) {
                       return (
                         <>
                           {task.status == board.title ? (
-                            // <div className="rounded-lg bg-2BG px-3 py-2">
-                            //   <h1>{task.title}</h1>
-                            // </div>
                             <SingleTask
                               title={task.title}
                               priority={task.priority}
@@ -105,6 +102,8 @@ function TasksList({ serverTasks, projectID }: Props) {
                               projectID={projectID}
                               taskID={task.id}
                               status={task.status}
+                              groupID={task.group_id}
+                              groups={groups}
                             />
                           ) : null}
                         </>

@@ -1,18 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import {
-  TaskGroupValue,
   TaskPriorityValue,
   createTaskModalValue,
   handleCreateTaskModalState,
   handleSetTaskPriorityState,
   handleTaskGroupState,
+  setTaskGroup,
+  setTaskGroupID,
+  setTaskGroupIDValue,
   setTaskGroupModalValue,
   setTaskPriority,
   setTaskPriorityModalValue,
   setTaskStatus,
+  taskGroupValue,
 } from "./handleTasksSlice";
 import SetPriority from "./setPriority";
 import { createClient } from "@/utils/supabase/client";
@@ -27,10 +30,12 @@ function CreateTaskForm({ projectID }: Props) {
   const setTaskPriorityModal = useAppSelector(setTaskPriorityModalValue);
   const taskPriority = useAppSelector(TaskPriorityValue);
   const setTaskGroupModal = useAppSelector(setTaskGroupModalValue);
-  const taskGroup = useAppSelector(TaskGroupValue);
+  const taskGroup = useAppSelector(taskGroupValue);
+  const taskGroupID = useAppSelector(setTaskGroupIDValue);
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDeadline, setTaskDeadline] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
+  const [groupList, setGroupList] = useState<any[] | null>();
 
   const createTask = async () => {
     const supabase = createClient();
@@ -44,10 +49,20 @@ function CreateTaskForm({ projectID }: Props) {
           description: taskDescription,
           project_id: projectID,
           status: "To do",
+          group_id: taskGroupID == 0 ? null : taskGroupID,
         },
       ])
       .select();
     console.log(error);
+  };
+
+  const getGroups = async () => {
+    const supabase = createClient();
+    const { data: Groups, error } = await supabase
+      .from("Groups")
+      .select("*")
+      .eq("project_id", projectID);
+    setGroupList(Groups);
   };
 
   return createTaskModal ? (
@@ -86,18 +101,32 @@ function CreateTaskForm({ projectID }: Props) {
                   <SetPriority />
                 </div>
               </div>
-              {/* <div className="flex items-center gap-2">
-                <p>Group:</p>
+
+              <div className="flex items-center gap-2">
+                <p
+                  onClick={() => {
+                    console.log(groupList);
+                  }}
+                >
+                  Group:
+                </p>
                 <div
                   className="relative w-[150px] cursor-pointer rounded-lg bg-3BG px-3 py-1"
                   onClick={() => {
                     dispatch(handleTaskGroupState(!setTaskGroupModal));
                   }}
                 >
-                  <p>{taskGroup == "" ? "None" : taskGroup}</p>
-                  <SetGroup />
+                  <p
+                    onClick={() => {
+                      getGroups();
+                    }}
+                  >
+                    {taskGroup == "" ? "None" : taskGroup}
+                  </p>
+                  <SetGroup groups={groupList} projectID={projectID} />
                 </div>
-              </div> */}
+              </div>
+
               <div className="flex items-center gap-2">
                 <p>Deadline:</p>
                 <input
@@ -130,6 +159,8 @@ function CreateTaskForm({ projectID }: Props) {
               dispatch(setTaskPriority(""));
               setTaskDeadline("");
               setTaskDescription("");
+              dispatch(setTaskGroup(""));
+              dispatch(setTaskGroupID(0));
             }}
             className=" rounded-lg bg-brandColor px-3 py-2 font-bold"
           >

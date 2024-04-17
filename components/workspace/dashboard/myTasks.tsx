@@ -25,12 +25,14 @@ function MyTasks({ serverTasks, projectID }: Props) {
               id,
               project_id,
               status,
+              groupID,
             }: {
               title: string;
               priority: string;
               id: number;
               project_id: number;
               status: string;
+              groupID: number;
             }) => {
               return (
                 <>
@@ -51,6 +53,7 @@ function MyTasks({ serverTasks, projectID }: Props) {
                           taskID={id}
                           projectID={project_id}
                           status={"to do"}
+                          groupID={groupID}
                         />
                       )}
                     </>

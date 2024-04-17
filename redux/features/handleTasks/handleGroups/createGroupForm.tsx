@@ -23,7 +23,7 @@ function CreateGroupForm({}: Props) {
     const supabase = createClient();
     const { data, error } = await supabase
       .from("Groups")
-      .insert([{ group_title: groupTitle, project_id: currentProjectID }])
+      .insert([{ title: groupTitle, project_id: currentProjectID }])
       .select();
   };
 
@@ -33,7 +33,7 @@ function CreateGroupForm({}: Props) {
         <input
           type="text"
           placeholder="Group name"
-          className="mx-2 mt-2 rounded-lg bg-4BG indent-2 text-textColor outline-none"
+          className="mx-2 mt-2 rounded-lg bg-4BG indent-2 text-sm font-medium text-textColor outline-none"
           onChange={(e) => {
             setGroupTitle(e.target.value);
           }}

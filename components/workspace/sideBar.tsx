@@ -65,7 +65,7 @@ function SideBar({}: Props) {
             </button>
           </Link>
         </div>
-        <div className="absolute -top-7 flex w-[200px] items-center justify-center md:relative md:w-full md:pb-20">
+        <div className="absolute -top-7 flex w-[200px] items-center justify-center md:relative md:w-full md:pb-14">
           <HandleActions />
           <CreateGroupForm />
         </div>

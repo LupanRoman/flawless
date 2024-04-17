@@ -1,5 +1,6 @@
 import MyTasks from "@/components/workspace/dashboard/myTasks";
 import ProjectState from "@/components/workspace/dashboard/projectState";
+import CreateTaskForm from "@/redux/features/handleTasks/createTaskForm";
 import { createClient } from "@/utils/supabase/server";
 import Link from "next/link";
 import React from "react";
@@ -18,9 +19,12 @@ async function page({ params: { id } }: { params: { id: number } }) {
 
   return (
     <>
-      <div className="flex flex-col gap-5 md:flex-row">
-        <MyTasks serverTasks={Tasks} projectID={id} />
-        <ProjectState />
+      <div>
+        <div className="flex flex-col gap-5 md:flex-row">
+          <MyTasks serverTasks={Tasks} projectID={id} />
+          <ProjectState />
+          <CreateTaskForm projectID={id} />
+        </div>
       </div>
     </>
   );
