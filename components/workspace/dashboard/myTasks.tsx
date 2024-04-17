@@ -5,11 +5,10 @@ import Link from "next/link";
 type Props = {
   serverTasks: any;
   projectID: number;
+  groups: any;
 };
 
-function MyTasks({ serverTasks, projectID }: Props) {
-  console.log(serverTasks);
-
+function MyTasks({ serverTasks, projectID, groups }: Props) {
   return (
     <>
       <div
@@ -54,6 +53,7 @@ function MyTasks({ serverTasks, projectID }: Props) {
                           projectID={project_id}
                           status={"to do"}
                           groupID={groupID}
+                          groups={groups}
                         />
                       )}
                     </>

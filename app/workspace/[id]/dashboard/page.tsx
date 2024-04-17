@@ -17,11 +17,16 @@ async function page({ params: { id } }: { params: { id: number } }) {
     .select("*")
     .eq("project_id", id);
 
+  const { data: Groups, error: groupError } = await supabase
+    .from("Groups")
+    .select("*")
+    .eq("project_id", id);
+
   return (
     <>
       <div>
         <div className="flex flex-col gap-5 md:flex-row">
-          <MyTasks serverTasks={Tasks} projectID={id} />
+          <MyTasks serverTasks={Tasks} projectID={id} groups={Groups} />
           <ProjectState />
           <CreateTaskForm projectID={id} />
         </div>

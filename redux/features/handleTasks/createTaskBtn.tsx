@@ -15,7 +15,7 @@ type Props = {
 function CreateTaskBtn({ renderedIn }: Props) {
   const dispatch = useAppDispatch();
   const workspaceActions = useAppSelector(workspaceActionsModalState);
-  
+
   return (
     <>
       <div
@@ -33,7 +33,7 @@ function CreateTaskBtn({ renderedIn }: Props) {
             onClick={() => {
               dispatch(handleWorkspaceActions(!workspaceActions));
             }}
-            className="rounded-lg px-2 py-1 text-start text-xs font-medium hover:bg-4BG"
+            className="w-full rounded-lg px-2 py-1 text-start text-xs font-medium hover:bg-4BG"
           >
             Create task
           </button>

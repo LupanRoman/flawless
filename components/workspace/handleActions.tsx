@@ -30,7 +30,9 @@ function HandleActions({}: Props) {
 
         {workspaceActions ? (
           <div className="absolute -left-20 -top-20 flex w-[200px] flex-col items-start gap-2 rounded-lg bg-3BG px-2 py-2 md:-top-20 md:left-0 md:w-full">
-            <CreateTaskBtn renderedIn="sideBar" />
+            <div className="w-full flex">
+              <CreateTaskBtn renderedIn="sideBar" />
+            </div>
             <button
               onClick={() => {
                 dispatch(handleCreateTaskGroupModal(!createGroupModal));
