@@ -15,6 +15,7 @@ interface TasksState {
   taskStatus: string;
   taskStatusModal: boolean;
   workspaceActions: boolean;
+  groupIDFilter: number;
 }
 
 const initialState: TasksState = {
@@ -31,6 +32,7 @@ const initialState: TasksState = {
   taskStatus: "To do",
   taskStatusModal: false,
   workspaceActions: false,
+  groupIDFilter: 0,
 };
 
 export const handleTasksSlice = createSlice({
@@ -79,6 +81,10 @@ export const handleTasksSlice = createSlice({
     handleCreateTaskGroupModal: (state, action) => {
       state.createGroupModalState = action.payload;
     },
+    handleGroupIDFilter: (state, action) => {
+      // Set the id of the group to filter tasks
+      state.groupIDFilter = action.payload;
+    },
   },
 });
 
@@ -96,6 +102,7 @@ export const {
   handleWorkspaceActions,
   handleCreateTaskGroupModal,
   setTaskGroupID,
+  handleGroupIDFilter,
 } = handleTasksSlice.actions;
 
 export const priorityFilterValue = (state: RootState): string => {
@@ -150,6 +157,10 @@ export const workspaceActionsModalState = (state: RootState): boolean => {
 
 export const createGroupModalValue = (state: RootState): boolean => {
   return state.handleTaskSlice.createGroupModalState;
+};
+
+export const groupIDFilterValue = (state: RootState): number => {
+  return state.handleTaskSlice.groupIDFilter;
 };
 
 export default handleTasksSlice.reducer;

@@ -9,10 +9,13 @@ import {
   handleSetTaskPriorityState,
   handleTaskGroupState,
   handleTaskStatusModal,
+  setTaskGroup,
+  setTaskGroupIDValue,
   setTaskGroupModalValue,
   setTaskPriority,
   setTaskPriorityModalValue,
   setTaskStatus,
+  taskGroupValue,
   taskStatusModalValue,
   taskStatusValue,
 } from "@/redux/features/handleTasks/handleTasksSlice";
@@ -38,9 +41,11 @@ function EditTask({ slug, taskGroupID }: Props) {
   // const [showStatus, setShowStatus] = useState(false);
   const taskStatusModal = useAppSelector(taskStatusModalValue);
   // const [taskStatus, setTaskStatus] = useState("To do");
-  const [taskGroup, setTaskGroup] = useState<any[] | null | string>();
+  const [taskGroupTitle, setTaskGroupTitle] = useState<any[] | null | string>();
   const setTaskGroupModal = useAppSelector(setTaskGroupModalValue);
   const [groupsList, setGroupsList] = useState<any[] | null>();
+  const taskGroupCurrentTitle = useAppSelector(taskGroupValue);
+  const updatedTaskGroupID = useAppSelector(setTaskGroupIDValue);
 
   useEffect(() => {
     const getTask = async () => {
@@ -58,7 +63,7 @@ function EditTask({ slug, taskGroupID }: Props) {
 
   useEffect(() => {
     if (taskGroupID[0].group_id == null) {
-      setTaskGroup("None");
+      setTaskGroupTitle("None");
     } else {
       const getGroup = async () => {
         const supabase = createClient();
@@ -68,7 +73,7 @@ function EditTask({ slug, taskGroupID }: Props) {
           .select("*")
           .eq("id", taskGroupID[0].group_id);
         console.log(Group);
-        setTaskGroup(Group![0].title);
+        setTaskGroupTitle(Group![0].title);
       };
       getGroup();
     }
@@ -80,6 +85,7 @@ function EditTask({ slug, taskGroupID }: Props) {
     deadline: string,
     description: string,
     status: string,
+    group_id: number,
   ) => {
     const supabase = createClient();
     const { data, error } = await supabase
@@ -90,6 +96,7 @@ function EditTask({ slug, taskGroupID }: Props) {
         deadline: taskDeadline == "" ? deadline : taskDeadline,
         description: taskDescription == "" ? description : taskDescription,
         status: taskStatus == "" ? status : taskStatus,
+        group_id: taskGroupID == group_id ? group_id : updatedTaskGroupID,
       })
       .eq("id", slug)
       .select();
@@ -117,6 +124,13 @@ function EditTask({ slug, taskGroupID }: Props) {
               <div
                 onClick={() => {
                   router.back();
+                  dispatch(setTaskStatus(""));
+                  setTaskTitle("");
+                  dispatch(setTaskPriority(""));
+                  setTaskDeadline("");
+                  setTaskDescription("");
+                  dispatch(setTaskGroup(""));
+                  dispatch(handleTaskGroupState(false));
                 }}
                 className="absolute bottom-0 left-0 right-0 top-0 z-30 flex w-full
            justify-end bg-2BG/20"
@@ -200,9 +214,11 @@ function EditTask({ slug, taskGroupID }: Props) {
                               console.log(Groups);
                             }}
                           >
-                            {taskGroup}
+                            {taskGroupCurrentTitle == ""
+                              ? taskGroupTitle
+                              : taskGroupCurrentTitle}
                           </p>
-                          <SetGroup groups={groupsList} />
+                          <SetGroup groups={groupsList} renderedIn="editTask" />
                         </div>
                       </div>
 
@@ -241,12 +257,14 @@ function EditTask({ slug, taskGroupID }: Props) {
                         deadline,
                         description,
                         status,
+                        group_id,
                       );
                       dispatch(setTaskStatus(""));
                       setTaskTitle("");
                       dispatch(setTaskPriority(""));
                       setTaskDeadline("");
                       setTaskDescription("");
+                      dispatch(setTaskGroup(""));
                       router.back();
                     }}
                     className=" rounded-lg bg-brandColor px-3 py-2 font-medium"

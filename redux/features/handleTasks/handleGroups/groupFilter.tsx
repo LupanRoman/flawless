@@ -7,6 +7,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import {
   createGroupModalValue,
   handleCreateTaskGroupModal,
+  handleGroupIDFilter,
+  setTaskGroupID,
 } from "../handleTasksSlice";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
 
@@ -69,11 +71,27 @@ function GroupFilter({ serverGroups }: Props) {
         {openGroupLabels ? (
           <div className="absolute left-0 right-0 top-12 flex flex-col items-start gap-2 rounded-lg bg-3BG px-2 py-2">
             <div className="flex w-full flex-col gap-2">
+              <p
+                onClick={() => {
+                  dispatch(handleGroupIDFilter(0));
+                  setOpenGroupLabels(!openGroupLabels);
+                }}
+              >
+                All
+              </p>
               {groupList.map((group: any) => {
                 return (
                   <>
                     <div className="flex w-full items-center justify-between">
-                      <p className="text-sm">{group.title.toLowerCase()}</p>
+                      <p
+                        onClick={() => {
+                          dispatch(handleGroupIDFilter(group.id));
+                          setOpenGroupLabels(!openGroupLabels);
+                        }}
+                        className="cursor-pointer text-sm"
+                      >
+                        {group.title.toLowerCase()}
+                      </p>
                       <button
                         onClick={() => {
                           // TODO Create a conditional and after the user agrees we can delete the group

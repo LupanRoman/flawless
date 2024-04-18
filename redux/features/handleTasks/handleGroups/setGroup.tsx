@@ -10,12 +10,13 @@ import {
 
 type Props = {
   groups: any;
+  renderedIn: string;
 };
 
-function SetGroup({ groups }: Props) {
+function SetGroup({ groups, renderedIn }: Props) {
   const dispatch = useAppDispatch();
   const setGroupModal = useAppSelector(setTaskGroupModalValue);
-
+  //!! renderedIn: editTask | createTask
   return (
     <>
       <div>

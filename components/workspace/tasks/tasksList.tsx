@@ -1,6 +1,10 @@
 "use client";
 import Boards from "@/data/boards";
-import { priorityFilterValue } from "@/redux/features/handleTasks/handleTasksSlice";
+import {
+  groupIDFilterValue,
+  priorityFilterValue,
+  setTaskGroupIDValue,
+} from "@/redux/features/handleTasks/handleTasksSlice";
 import { useAppSelector } from "@/redux/store";
 import { createClient } from "@/utils/supabase/client";
 import React, { useEffect, useState } from "react";
@@ -12,6 +16,7 @@ type Props = { serverTasks: any; projectID: number; groups: any };
 function TasksList({ serverTasks, projectID, groups }: Props) {
   const [tasksList, setTasksList] = useState(serverTasks);
   const priorityFilter = useAppSelector(priorityFilterValue);
+  const groupIDFilter = useAppSelector(groupIDFilterValue);
 
   useEffect(() => {
     const supabase = createClient();
@@ -76,11 +81,32 @@ function TasksList({ serverTasks, projectID, groups }: Props) {
     filterTasks();
   }, [priorityFilter]);
 
+  useEffect(() => {
+    const filterTasksByGroup = async () => {
+      const supabase = createClient();
+
+      let query = supabase
+        .from("Tasks")
+        .select("*")
+        .eq("group_id", groupIDFilter);
+
+      if (groupIDFilter == 0) {
+        const { data: Tasks } = await supabase
+          .from("Tasks")
+          .select("*")
+          .eq("project_id", projectID);
+        setTasksList(Tasks);
+      } else {
+        const { data: Tasks, error } = await query;
+        setTasksList(Tasks);
+      }
+    };
+    filterTasksByGroup();
+  }, [groupIDFilter]);
+
   return (
     <>
       <div className="flex w-full flex-col gap-10">
-        {/* <Filters groups={groupList} /> */}
-        {/* Put pr for the boards */}
         <div className="horizontal flex snap-x gap-3 overflow-x-auto md:h-full md:overflow-x-hidden md:pr-10">
           {Boards.map((board) => {
             return (
@@ -90,7 +116,7 @@ function TasksList({ serverTasks, projectID, groups }: Props) {
                   className="boardComponent flex h-[580px] w-full flex-none snap-center flex-col gap-3 rounded-lg md:h-full md:flex-auto"
                 >
                   <h1 className="text-lg font-semibold">{board.title}</h1>
-                  <div className="tasks-scroll flex h-[580px] flex-col gap-3 overflow-y-auto pr-2 md:h-[500px]">
+                  <div className="tasks-scroll flex h-[580px] w-full flex-col gap-3 overflow-y-auto pr-2 md:h-[500px]">
                     {tasksList.map((task: any) => {
                       return (
                         <>
