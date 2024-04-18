@@ -123,7 +123,7 @@ function CreateTaskForm({ projectID }: Props) {
                   >
                     {taskGroup == "" ? "None" : taskGroup}
                   </p>
-                  <SetGroup groups={groupList} projectID={projectID} />
+                  <SetGroup groups={groupList} />
                 </div>
               </div>
 

@@ -9,11 +9,10 @@ import {
 } from "../handleTasksSlice";
 
 type Props = {
-  projectID: number;
   groups: any;
 };
 
-function SetGroup({ projectID, groups }: Props) {
+function SetGroup({ groups }: Props) {
   const dispatch = useAppDispatch();
   const setGroupModal = useAppSelector(setTaskGroupModalValue);
 
