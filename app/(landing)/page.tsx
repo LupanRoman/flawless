@@ -12,8 +12,6 @@ export default async function Index() {
 
   if (user) {
     return redirect("/hub");
-  } else if (!user) {
-    return;
   }
 
   return (
