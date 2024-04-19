@@ -23,8 +23,8 @@ export default function LogIn() {
       return redirect("/login?message=Could not authenticate user");
     }
 
-    return redirect("http://localhost:3000/hub");
-    // return redirect("https://flawless-omega.vercel.app/hub");
+    // return redirect("http://localhost:3000/hub");
+    return redirect("https://flawless-omega.vercel.app/hub");
   };
 
   const signInWithGoogle = async () => {

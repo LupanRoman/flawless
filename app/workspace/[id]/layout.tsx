@@ -27,7 +27,7 @@ export default async function RootLayout({
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return redirect("/login");
+    return redirect("/auth/login");
   }
 
   return (
