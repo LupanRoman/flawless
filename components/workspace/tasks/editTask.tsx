@@ -96,7 +96,8 @@ function EditTask({ slug, taskGroupID }: Props) {
         deadline: taskDeadline == "" ? deadline : taskDeadline,
         description: taskDescription == "" ? description : taskDescription,
         status: taskStatus == "" ? status : taskStatus,
-        group_id: taskGroupID == group_id ? group_id : updatedTaskGroupID,
+        group_id:
+          taskGroupID[0].group_id == group_id ? group_id : updatedTaskGroupID,
       })
       .eq("id", slug)
       .select();
@@ -190,7 +191,13 @@ function EditTask({ slug, taskGroupID }: Props) {
                             );
                           }}
                         >
-                          <p>{taskPriority == "" ? priority : taskPriority}</p>
+                          <p>
+                            {taskPriority == priority
+                              ? "None"
+                              : priority != taskPriority
+                                ? priority
+                                : taskPriority}
+                          </p>
                           <SetPriority />
                         </div>
                       </div>

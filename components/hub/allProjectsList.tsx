@@ -36,7 +36,7 @@ function AllProjectsList({ projects }: Props) {
                     isFavorite={favoriteProject.favorite}
                     key={favoriteProject.id}
                     deadline={favoriteProject.deadline}
-                    renderedIn="favorites"
+                    renderedIn="allProjects"
                   />
                 </>
               );

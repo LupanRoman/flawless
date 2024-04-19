@@ -23,7 +23,7 @@ function ProjectCard({
   };
   return (
     <>
-      <div>
+      <div key={projectID}>
         <Link
           href={`/workspace/${projectID}/dashboard`}
           onClick={() => {
